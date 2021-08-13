@@ -6,6 +6,7 @@
 }
 
 <h2 style="color:red">@TempData["tarihhatali"]</h2>
+<h2 style="color:red">@TempData["rezervasyonturuhatali"]</h2>
 
 
 
@@ -23,7 +24,7 @@
             <label class="col-sm-2 control-label">Giriş Tarihi</label>
             <div class="col-sm-10">
 
-                @Html.EditorFor(x => x.BookingDetail.CheckIn, "Date", new { @class = "form-control"})
+                @Html.EditorFor(x => x.BookingDetail.CheckIn, "Date", new { @class = "form-control" })
 
             </div>
         </div>
@@ -34,7 +35,7 @@
             <label class="col-sm-2 control-label">Çıkış Tarihi</label>
             <div class="col-sm-10">
 
-                @Html.EditorFor(x => x.BookingDetail.CheckOut, "Date", new { @class = "form-control"})
+                @Html.EditorFor(x => x.BookingDetail.CheckOut, "Date", new { @class = "form-control" })
 
             </div>
         </div>

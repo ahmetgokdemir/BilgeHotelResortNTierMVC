@@ -127,6 +127,12 @@ namespace Project.WEBUI.Controllers
                 return RedirectToAction("CartPage");
             }
 
+            if (cpvm.BookingDetail.BookingType == 0)
+            {
+                TempData["rezervasyonturuhatali"] = "Rezervasyon türü seçmelisiniz";
+                return RedirectToAction("CartPage");
+            }
+
             TempData["tarihgiris"] = cpvm.BookingDetail.CheckIn;
             TempData["tarihcikis"] = cpvm.BookingDetail.CheckOut;
             TempData["rezervasyontur"] = cpvm.BookingDetail.BookingType;

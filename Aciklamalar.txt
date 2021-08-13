@@ -7,7 +7,7 @@
 - UI > AdminAuthentication.cs (AdminAuthentication,UserSharedAuthentication düzenlenecek),
 
 Scaffold Column
-Otel Detay sayfasý..  TAMAM
+Otel Detay sayfasý..  +
 <img src="~/Pictures/47a8571d-433b-4820-8e67-97c1a9490f89.jpg" alt="Resim yok" width="100" height="300" title="@item.Name" />
 
 
@@ -16,4 +16,12 @@ Validationlar ..
 Loglama Filters ???
 
 _UpdatetaffPartial yanlýþ yazýlmýþ..
-Bakýma AL ve Bakýmdan çýkar buttonlarý güncellenin yanýna..
+Bakýma AL ve Bakýmdan çýkar buttonlarý güncellenin yanýna..+
+
+Baþka veriler de ekle init'e ..
+yorum satýrlarý ekle
+derse ait youm satýrlarýný sil
+%16 %18 %23 indirimleri +
+Git' e yükleme..+
+
+

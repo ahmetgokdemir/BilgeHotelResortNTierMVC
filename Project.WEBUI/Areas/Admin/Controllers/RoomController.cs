@@ -41,24 +41,6 @@ namespace Project.WEBUI.Areas.Admin.Controllers
             return View(rvm);
         }
 
-        public ActionResult AddRoom()
-        {
-            RoomVM rvm = new RoomVM
-            {
-                Room = new Room()             
-            };
-            return View(rvm);
-        }
-
-        [HttpPost]
-        public ActionResult AddRoom(Room Room, HttpPostedFileBase resim)
-        {
-            Room.ImagePath = ImageUploader.UploadImage("/Images/", resim);
-            _rRep.Add(Room);
-            return RedirectToAction("RoomList");
-        }
-
-        
         public PartialViewResult MaintenanceRoomAjax(int id)
         {
             RoomVM rvm = new RoomVM
@@ -151,16 +133,6 @@ namespace Project.WEBUI.Areas.Admin.Controllers
 
         }
 
-        public ActionResult DeleteRoom(int id)
-        {
-            _rRep.Delete(_rRep.Find(id));
-            return RedirectToAction("RoomList");
-        }
 
-        // GET: Admin/Room
-        public ActionResult Index()
-        {
-            return View();
-        }
     }
 }
