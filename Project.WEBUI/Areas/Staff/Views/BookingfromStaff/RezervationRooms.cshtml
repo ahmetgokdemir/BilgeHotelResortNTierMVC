@@ -1,0 +1,57 @@
+﻿@model BookingDetailVM
+
+@{
+    ViewBag.Title = "RezervationRooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/datatables")
+
+<div class="panel panel-primary">
+    <table class="table table-hover" id="tbl1">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Oda No</th>
+                <th>Rezervasyon Türü</th>
+                <th>Giriş Tarihi</th>
+                <th>Çıkış Tarihi</th>
+
+
+
+            </tr>
+        </thead>
+
+        @foreach (ActiveRezervationSecondDTO item in Model.ActiveRezervationDTOs)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.RoomNo</td>
+                <td>@item.BookingType</td>
+                <td>@item.CheckIn</td>
+                <td>@item.CheckOut</td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatables")
+
+    <script>
+
+        $('document').ready(function () {
+            $('#tbl1').DataTable();
+
+        });
+
+
+ 
+    </script>
+}
+

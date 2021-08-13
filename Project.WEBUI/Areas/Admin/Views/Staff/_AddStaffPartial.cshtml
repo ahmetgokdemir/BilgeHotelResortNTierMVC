@@ -1,0 +1,67 @@
+﻿@model AppUserVM
+
+@* Layoutsuz çalışan bir view olduğu için referencelar aşağıda verildi.. *@
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+
+<div>
+
+
+ 
+
+        @using (Html.BeginForm("AddStaff", "Staff", FormMethod.Post))
+        {
+            @*<dd>
+                @Html.ValidationMessageFor(model => model.DerivedCompany.CompanyName)
+
+            </dd>*@
+
+            @Html.TextBoxFor(x => x.StaffUser.FirstName, new { @class = "form-control", placeholder = "İsminizi giriniz" })
+
+            @Html.TextBoxFor(x => x.StaffUser.LastName, new { @class = "form-control", placeholder = "Soyisminizi giriniz" })
+
+            @Html.TextBoxFor(x => x.StaffUser.JobTitle, new { @class = "form-control", placeholder = "Meslek giriniz" })
+            @Html.TextBoxFor(x => x.StaffUser.Salary, new { @class = "form-control", placeholder = "Maaş giriniz" })
+            @*@Html.TextBoxFor(x => x.StaffUser.HireDate, "{0:dd-MM-yyyy}", new { @class = "form-control", placeholder = "İşe giriş tarihi giriniz" })*@
+            @Html.EditorFor(x => x.StaffUser.HireDate, "Date", new { @class = "form-control", placeholder = "İşe giriş tarihi giriniz" })
+            
+
+            @Html.TextBoxFor(x => x.StaffUser.UserName, new { @class = "form-control", placeholder = "Kullanıcı ismi" })
+            @Html.PasswordFor(x => x.StaffUser.Password, new { @class = "form-control", placeholder = "Sifre giriniz" })
+
+
+
+
+
+            <div>Telefon Numarası Giriniz =></div>
+            <br />
+
+            @Html.TextAreaFor(x => x.StaffUser.PhoneNo, new { @class = "form-control" })
+
+            <br />
+
+
+
+
+
+
+
+
+            <br />
+
+
+            <button class="btn btn-info">Ekle</button>
+
+
+        }
+
+ 
+
+</div>
+

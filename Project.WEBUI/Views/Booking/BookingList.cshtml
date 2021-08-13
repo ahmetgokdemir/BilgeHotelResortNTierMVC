@@ -1,0 +1,113 @@
+﻿@model RoomVM
+
+@{
+    ViewBag.Title = "BookingList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:red">@TempData["sepetBos"]</h2>
+<h2 style="color:red">@TempData["baglantiRed"]</h2>
+<h2 style="color:red">@TempData["sorun"]</h2>
+<h2 style="color:red">@TempData["odeme"]</h2>
+
+
+
+<div class="row">
+    <!--<div class="col-md-3">
+        <section class="panel">
+            <div class="panel-body">
+                <h2 style="color:aqua">Kategoriler</h2>
+                <ul>-->
+    @* public ActionResult ShoppingList(int? page, int? categoryID)  <=======> new { categoryID = item.ID }  *@
+    <!-- @*@foreach (Category item in Model.Categories)*@
+                    {
+                        <li style="padding-top:3px">@*@Html.ActionLink(item.CategoryName, "ShoppingList", new { categoryID = item.ID }, new { @class = "btn btn-primary" })*@</li>
+                    }
+                </ul>
+            </div>
+        </section>
+
+    </div>-->
+    @*<div class="col-md-9">*@
+    <!--<section class="panel">
+        <div class="panel-body">
+            <div class="pull-right">
+                <ul class="pagination pagination-sm">-->
+    @* sayfalamanın sayfa sayılarını yazmak (sayfalama tasarımı): web.config'e eklendi <add namespace="PagedList.Mvc" /> page gömülü sistemden gelir yani PagedListPager sisteminden gelir ShoppingControllerdaki page değil bu
+
+        Url.Action("ShoppingList", n.. şeklide action'a yönlendirecek.. Url.Action, ActionLink'e benzer (ActionLink görevi a tag'i çıkarmak href ile birlikte ama Url.Action ise sadece href(url) tag'i çıkaran html helperdır.. bir link tag'in içersindeki url'i render eder)
+
+           new { page, catego...  page'e değer vermedik nerdeden anlayacak hangi sayıya tıkladığımı zira page bir sayıya da eşitlemedim nasıl anlar? PagedList kütüphanesinin içersinde javascript var tıkladığınız değeri page'e atar.. ikinci parametre ise categoryID..
+
+    *@
+    <!--@*@if (TempData["catID"] != null)
+     {
+         <li>@Html.PagedListPager(Model.PagedProducts, page => Url.Action("ShoppingList", new { page, categoryID = TempData["catID"] }))</li> *@
+     }
+    else
+    {
+    <li>-->
+    @* Eğer CategoryID göndermemiş ise yani tüm ürünler üzerinde sayfalama yapmak istiyorsa*@
+    <!--@*@Html.PagedListPager(Model.PagedProducts, page => Url.Action("ShoppingList", new { page }))*@
+                    </li>
+                   }
+                </ul>
+            </div>
+        </div>
+    </section>-->
+
+    <div class="row product-list">
+
+
+        @foreach (Room item in Model.Rooms)
+        {
+            <div class="col-md-4">
+                <section class="panel">
+                    <div class="pro-img-box">
+
+                        @if (item.ImagePath == null)
+                        {
+                            <img src="~/Pictures/47a8571d-433b-4820-8e67-97c1a9490f89.jpg" alt="Resim yok" width="50" height="250" title="@item.RoomType" /> }
+                        else
+                        {
+                    <a href="@Url.Action("RoomDetails",new { id=item.ID})">
+                        <img src="@item.ImagePath" alt="Resim yok" width="50" height="250" title="@item.RoomType" />
+                    </a>
+                                }
+
+
+
+                                <a href="@Url.Action("AddToCart",new { id=item.ID})" class="adtocart">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                        </div>
+
+                    <div class="panel-body text-center">
+                        <h4>
+                            <a href="#" class="pro-title" title="@item.RoomType">
+                                @item.RoomDescription
+                            </a>
+                        </h4>
+                        <p class="price">₺@Convert.ToInt32(item.Price)</p>
+                    </div>
+                </section>
+            </div>
+        }
+
+
+
+
+
+
+    </div>
+    @*</div>*@
+</div>
+
+@section Sepet{
+    <li>
+        <a href="@Url.Action("CartPage","Booking")">
+            <i class="icon-shopping-cart"></i> Cart
+        </a>
+    </li>
+
+}

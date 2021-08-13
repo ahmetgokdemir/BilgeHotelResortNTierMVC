@@ -1,0 +1,120 @@
+﻿@model CartPageVM
+
+@{
+    ViewBag.Title = "CartPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .genislik {
+        width: 300px;
+    }
+</style>
+
+
+@using (Html.BeginForm("RezervasyonOnayla", "BookingfromStaff", FormMethod.Post))
+{
+
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Adınız</label>
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(x => x.CustomerProfile.FirstName, new { @class = "form-control genislik", placeholder = "İsminizi giriniz" })
+
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Soyadınız</label>
+            <div class="col-sm-10">
+
+                @Html.TextBoxFor(x => x.CustomerProfile.LastName, new { @class = "form-control genislik", placeholder = "Soyisminizi giriniz" })
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Giriş Tarihi</label>
+            <div class="col-sm-10">
+
+                @Html.EditorFor(x => x.BookingDetail.CheckIn, "Date", new { @class = "form-control" })
+
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Çıkış Tarihi</label>
+            <div class="col-sm-10">
+
+                @Html.EditorFor(x => x.BookingDetail.CheckOut, "Date", new { @class = "form-control" })
+
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Tam Pansiyon</label>
+            <div class="col-sm-4">
+
+                @Html.RadioButtonFor(x => x.BookingDetail.BookingType, 1)
+
+            </div>
+
+            <label class="col-sm-2 control-label">Her şey Dahil</label>
+            <div class="col-sm-4">
+
+                @Html.RadioButtonFor(x => x.BookingDetail.BookingType, 2)
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row product-list">
+
+
+        @foreach (CartItem item in Model.Cart.Sepetim)
+        {
+            <div class="col-md-4">
+                <section class="panel">
+                    <div class="pro-img-box">
+
+                        @if (item.ImagePath == null)
+                        {
+                            <img src="~/Pictures/47a8571d-433b-4820-8e67-97c1a9490f89.jpg" alt="Resim yok" width="50" height="250" title="@item.RoomTypeName" /> }
+                        else
+                        {
+                            <img src="@item.ImagePath" alt="Resim yok" width="50" height="250" title="@item.RoomTypeName" />}
+
+
+                        <a href="@Url.Action("DeleteFromCart", new { id = item.ID })" class="adtocart">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                    </div>
+
+                    <div class="panel-body text-center">
+                        <h4>
+                            <a href="#" class="pro-title" title="@item.RoomTypeName">
+                                @item.RoomTypeName x @item.Amount
+                            </a>
+                        </h4>
+                        <p class="price">₺@item.SubTotal</p>
+                    </div>
+                </section>
+            </div>}
+
+    </div>
+
+    <button class="btn btn-info">Rezervazyon Onayla</button>
+
+}
+

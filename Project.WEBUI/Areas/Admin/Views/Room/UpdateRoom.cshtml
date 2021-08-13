@@ -1,0 +1,77 @@
+﻿@model RoomVM
+
+@{
+    ViewBag.Title = "UpdateRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .genislik {
+        width: 300px;
+    }
+</style>
+
+<h3 style="color:red">   @TempData["OdaSayisiHatali"]</h3>
+
+
+@using (Html.BeginForm("UpdateRoom", "Room", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.Room.ID)
+    @Html.HiddenFor(x => x.Room.RoomCount)
+
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    Oda Güncelleme Sayfası
+                </header>
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Fiyat</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(x => x.Room.Price, new { @class = "form-control genislik" })
+                        </div>
+                    </div>
+                </div>
+                <br /> <br />
+
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Resim seciniz</label>
+                        <div class="col-sm-10">
+                            @if (!string.IsNullOrEmpty(Model.Room.ImagePath))
+                            {
+                                @*<input type="checkbox" id="remainPicture" name="remainPicture" value="remainPicture">*@
+                                @Html.CheckBox("Remember")
+                                <label for="vehicle1"> mevcut resim kalsın</label><br>
+                                <img width="30" height="30" title="@Model.Room.RoomDescription" src="@Model.Room.ImagePath" />
+                            }
+
+                            <input type="file" name="resim" class="form-control genislik" />
+                        </div>
+                    </div>
+                </div>
+                <br /> <br />
+
+
+
+
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Güncelle</label>
+                        <div class="col-sm-10">
+                            <button class="btn btn-primary">
+                                Güncelle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+        </div>
+    </div>}
+

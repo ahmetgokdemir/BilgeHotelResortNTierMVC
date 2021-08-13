@@ -1,0 +1,111 @@
+﻿@model RoomVM
+
+@{
+    ViewBag.Title = "RoomDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .genislik {
+        width: 300px;
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Oda Detay Sayfası
+            </header>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Oda Türü</label>
+                    <div class="col-sm-10">
+                        @Html.DisplayFor(x => x.Room.RoomType, new { @class = "form-control genislik" })
+                    </div>
+                </div>
+            </div>
+
+
+            <br /> <br />
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Oda Açıklama</label>
+                    <div class="col-sm-10">
+                        @Html.DisplayFor(x => x.Room.RoomDescription, new { @class = "form-control genislik" })
+                    </div>
+                </div>
+            </div>
+            <br /> <br />
+
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Oda Görünüm</label>
+                    <div class="col-sm-10">
+
+                        <img width="300" height="200" title="@Model.Room.RoomDescription" src="@Model.Room.ImagePath" />
+
+                    </div>
+                </div>
+            </div>
+            <br /> <br />
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Balkon Mevcudiyet</label>
+                    <div class="col-sm-10">
+
+                        @if (Model.Room.availableBalcony == true)
+                        {
+                            <label> Balkon Mevcut </label>
+                        }
+                        else
+                        {
+                            <label> Balkon Mevcut Değildir </label>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+            <br /> <br />
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Minibar Mevcudiyet</label>
+                    <div class="col-sm-10">
+
+                        @if (Model.Room.availableMinibar == true)
+                        {
+                            <label> Minibar Mevcut </label>
+                        }
+                        else
+                        {
+                            <label> Minibar Mevcut Değildir </label>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+            <br /> <br />
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Oda Fiyat</label>
+                    <div class="col-sm-10">
+                        ₺@Html.DisplayFor(x => x.Room.Price, new { @class = "form-control genislik" })
+                    </div>
+                </div>
+            </div>
+            <br /> <br />
+
+
+        </section>
+    </div>
+</div>
+

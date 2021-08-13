@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project.ENTITIES.Models
+{
+    public class BookingDetail : BaseEntity
+    {
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public decimal SubPrice { get; set; }
+        public bool ReservationActive { get; set; }
+        public Package BookingType { get; set; }
+        public string RoomNo { get; set; }
+
+
+        public int BookingID { get; set; }
+        public int RoomID { get; set; }
+
+        public virtual Room Room { get; set; }
+        public virtual Booking Booking { get; set; }
+
+        public enum Package
+        {
+            TamPansiyon = 1, HerseyDahil = 2
+        }
+    }
+}

@@ -1,0 +1,56 @@
+﻿@model AppUserVM
+
+@* Layoutsuz çalışan bir view olduğu için referencelar aşağıda verildi.. *@
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+
+<div>
+
+
+
+
+    @using (Html.BeginForm("UpdateStaff", "Staff", FormMethod.Post))
+    {
+        @*<dd>
+                @Html.ValidationMessageFor(model => model.DerivedCompany.CompanyName)
+
+            </dd>*@
+
+
+
+        @*@Html.TextBoxFor(x => x.StaffUser.Salary, new { @class = "form-control", placeholder = "Maaş giriniz" })*@
+
+
+
+
+        @Html.HiddenFor(x => x.StaffUser.ID)
+
+        @Html.PasswordFor(x => x.StaffUser.Password, new { @class = "form-control", placeholder = "Sifre giriniz" })
+        @Html.TextBoxFor(x => x.StaffUser.Salary, new { @class = "form-control", placeholder = "Maaş giriniz" })
+        <div>Telefon Numarası Giriniz =></div>
+        <br />
+
+        @Html.TextAreaFor(x => x.StaffUser.PhoneNo, new { @class = "form-control" })
+
+
+
+
+        <br />
+
+
+        <button class="btn btn-info">Güncelle</button>
+
+
+    }
+
+
+
+</div>
+
+

@@ -1,0 +1,109 @@
+﻿@model RoomVM
+
+@{
+    ViewBag.Title = "RoomList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="panel-body">
+    <div class="adv-table">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+            <thead>
+                <tr>
+                    <th>Oda ID</th>
+                    <th>Oda Türü</th>
+                    <th class="hidden-phone">Oda Acıklaması</th>
+                    <th class="hidden-phone">Oda Sayısı</th>
+                    <th class="hidden-phone">Mevcut Hazır Oda Sayısı</th>
+                    <th class="hidden-phone">Oda Resim</th>
+                    <th class="hidden-phone">Balkon</th>
+                    <th class="hidden-phone">Minibar</th>
+                    <th class="hidden-phone">Oda Ücret</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (Room item in Model.Rooms)
+                {
+                    <tr class="gradeU">
+                        <td>@item.ID</td>
+                        <td>@item.RoomType</td>
+                        <td class="hidden-phone">@item.RoomDescription</td>
+                        <td class="center hidden-phone">@item.RoomCount</td>
+                        <td class="center hidden-phone">@item.RoomAvailable</td>
+
+
+                        @*<td class="center hidden-phone">@item.ImagePath</td>*@
+                        <td> <img width="30" height="30" title="@item.RoomType" src="@item.ImagePath" />   </td>
+
+                        @if (@item.availableBalcony == true)
+                        {
+                            <td class="center hidden-phone">Mevcut</td>
+                        }
+                        else
+                        {
+                            <td class="center hidden-phone">Mevcut değildir</td>
+                        }
+
+                        @if (@item.availableMinibar == true)
+                        {
+                            <td class="center hidden-phone">Mevcut</td>
+                        }
+                        else
+                        {
+                            <td class="center hidden-phone">Mevcut değildir</td>
+                        }
+
+                        <td class="center hidden-phone">@item.Price</td>
+
+
+                    </tr>
+                }
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@Html.ActionLink("Personel Profilleri", "StaffList", "Staff", new { Area = "Admin" }, new { @class = "btn btn-info" })
+@Html.ActionLink("Oda Düzenle", "OperateRooms", "Room", new { Area = "Admin" }, new { @class = "btn btn-success" })
+
+
+<div class="modal fade" id="MaintenanceRoomModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Oda Bakım Ekranı</h4>
+            </div>
+            <div class="modal-body" id="MaintenanceRoom">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function MaintenanceRoomLoaded() {
+        $("#MaintenanceRoomModal").modal('show');
+    }
+
+  
+</script>
+
+<script src="~/Areas/Admin/AdminContent/RoomDTJ.js"></script>
+
+
+

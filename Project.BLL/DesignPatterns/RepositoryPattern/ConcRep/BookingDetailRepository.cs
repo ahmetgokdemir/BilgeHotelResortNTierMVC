@@ -1,0 +1,81 @@
+﻿using Project.BLL.DesignPatterns.RepositoryPattern.BaseRep;
+using Project.BLL.DesignPatterns.SingletonPattern;
+using Project.DAL.Context;
+using Project.DTO.Models;
+using Project.ENTITIES.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
+{
+    public class BookingDetailRepository : BaseRepository<BookingDetail>
+    {
+        MyContext _db;
+        public BookingDetailRepository()
+        {
+            _db = DBTool.DBInstance;
+        }
+
+
+        public void GetActiveRezervation()
+        {
+            List<BookingDetail> bds =  _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).ToList();
+
+            foreach (BookingDetail bd in bds)
+            {
+                if (bd.CheckOut <= DateTime.Now)
+                {
+                    bd.ReservationActive = false;
+
+                    RoomDetail rd = _db.Set<RoomDetail>().Where(x => x.RoomNo == bd.RoomNo).FirstOrDefault();
+                    rd.Situation = true;
+
+                    Room r = _db.Set<Room>().Where(x => x.ID == bd.RoomID).FirstOrDefault();
+                    // int roomCount = Convert.ToInt32(r.RoomAvailable) + Convert.ToInt32(bd.Quantity);
+                    // r.RoomAvailable = Convert.ToInt16(roomCount);
+                    r.RoomAvailable++;
+
+                    _db.SaveChanges();
+                }
+
+            }           
+
+        }
+
+        // GetActiveRezervationfromStaff
+        public List<ActiveRezervationSecondDTO> GetActiveRezervationfromStaff()
+        {
+            return _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).Join(_db.Set<Booking>(),
+                (bd => bd.BookingID),
+                (bk => bk.ID),
+                (bd, bk) => new ActiveRezervationDTO
+                {
+                    RoomNo = bd.RoomNo,
+                    CheckIn = bd.CheckIn,
+                    CheckOut = bd.CheckOut,
+                    BookingType = bd.BookingType.ToString(),
+                    CustomerID = bk.CustomerID
+                }).Join(_db.Set<CustomerProfile>(),
+                (ar => ar.CustomerID),
+                (csp => csp.ID),
+                (ar, csp) => new ActiveRezervationSecondDTO
+                {
+                    RoomNo = ar.RoomNo,
+                    CheckIn = ar.CheckIn,
+                    CheckOut = ar.CheckOut,
+                    BookingType = ar.BookingType,
+                    CustomerID = ar.CustomerID,
+                    FirstName = csp.FirstName,
+                    LastName = csp.LastName
+                })
+                .ToList();
+
+
+        }
+
+
+    }
+}

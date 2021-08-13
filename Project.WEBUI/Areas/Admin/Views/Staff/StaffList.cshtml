@@ -1,0 +1,128 @@
+﻿@model AppUserVM
+@{
+    ViewBag.Title = "StaffList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/datatables")
+
+<h2 style="color:red;">@TempData["ZatenVar"] </h2>
+<h2 style="color:red;">@TempData["mesaj"] </h2>
+
+<div>
+    Lütfen Eleman girişi için
+
+    @Ajax.ActionLink("tıklayınız", "AddStaffAjax", null,
+    new AjaxOptions
+    {
+        HttpMethod = "Get",
+        UpdateTargetId = "StaffDetails",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "StaffLoaded"
+    },
+    new { @class = "btn btn-info" })
+</div>
+
+
+<div class="panel-body">
+    <div class="adv-table">
+        <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+            <thead>
+                <tr>
+                    <th>Personel ID</th>
+                    <th>Personel Ad</th>
+                    <th>Personel Soyad</th>
+                    <th class="hidden-phone">Personel Meslek</th>
+                    <th class="hidden-phone">Personel İşe Giriş Tarih</th>
+                    <th class="hidden-phone">Personel Maaş</th>
+                    <th class="hidden-phone">Personel Telefon No</th>
+
+                    <th class="hidden-phone">Güncelle</th>
+                    <th class="hidden-phone">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (StaffProfile item in Model.StaffUsers)
+                {
+                    <tr class="gradeU">
+                        <td>@item.ID</td>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td class="hidden-phone">@item.JobTitle</td>
+                        <td class="center hidden-phone">@item.HireDate</td>
+                        <td class="center hidden-phone">@item.Salary</td>
+                        <td class="center hidden-phone">@item.PhoneNo</td>
+
+                        @*<td class="center hidden-phone">@item.ImagePath</td>*@
+                        @*<td> <img width="30" height="30" title="@item.RoomType" src="@item.ImagePath" />   </td>*@
+
+                        <td class="center hidden-phone">
+                            @Ajax.ActionLink("Güncelle", "UpdateStaffAjax", new { id = item.ID },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                UpdateTargetId = "StaffDetails",
+                                InsertionMode = InsertionMode.Replace,
+                                OnSuccess = "StaffLoaded"
+                            },
+                            new { @class = "btn btn-warning" })
+                        </td>
+
+                        <td class="center hidden-phone">@Html.ActionLink("Sil", "DeleteStaff", "Staff", new { Area = "Admin", id = item.ID }, new { @class = "btn btn-danger" })</td>
+
+                    </tr>
+                }
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="modal fade" id="StaffDetailsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Eleman Giriş Ekranı</h4>
+            </div>
+            <div class="modal-body" id="StaffDetails">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<script>
+
+        function StaffLoaded() {
+            $("#StaffDetailsModal").modal('show');
+        }
+
+    </script>*@
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatables")
+
+    <script>
+
+        $('document').ready(function () {
+            $('#hidden-table-info').DataTable();
+
+        });
+
+        function StaffLoaded() {
+            $("#StaffDetailsModal").modal('show');
+        }
+
+
+    </script>
+}
+

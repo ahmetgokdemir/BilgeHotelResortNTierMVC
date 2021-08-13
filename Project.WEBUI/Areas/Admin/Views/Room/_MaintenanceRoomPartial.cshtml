@@ -1,0 +1,35 @@
+﻿@model RoomVM
+
+@* Layoutsuz çalışan bir view olduğu için referencelar aşağıda verildi.. *@
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+<style>
+    .genislik {
+        width: 100px;
+    }
+</style>
+
+<div>
+
+    @using (Html.BeginForm("MaintenanceRoom", "Room", FormMethod.Post))
+    {
+
+        @Html.Label("Oda Numarası: ", new { @class = "genislik" })
+        @Html.DropDownListFor(x => x.RoomDetail.ID, new SelectList(Model.RoomDetails, "ID", "RoomNo"), new { @class = "genislik" })
+
+
+
+        <br />
+        <br />
+
+
+        <button class="btn btn-info">Bakıma Al</button>
+
+
+    }
+
+
+
+</div>
