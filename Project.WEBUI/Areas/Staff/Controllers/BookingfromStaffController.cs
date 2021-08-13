@@ -58,7 +58,8 @@ namespace Project.WEBUI.Areas.Staff.Controllers
         {
             RoomVM rvm = new RoomVM
             {
-                RoomDetails = _rdRep.GetMaintenanceRoomsfromStaff()
+                RoomDetails = _rdRep.GetMaintenanceRoomsfromStaff(),
+                BookingDetails= _bdRep.GetEmptiedRoomsfromStaff()
             };
 
             return View(rvm);

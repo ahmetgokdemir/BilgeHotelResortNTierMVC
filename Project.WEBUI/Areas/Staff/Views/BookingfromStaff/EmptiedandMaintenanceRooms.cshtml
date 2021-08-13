@@ -7,7 +7,7 @@
 
 <div class="panel panel-primary">
     <table class="table table-hover">
-        <h2 style="color:red">Bakımdaki Odalar</h2>
+        <h2 style="color:royalblue">Bakımdaki Odalar</h2>
         <tr>
             <th>Oda No</th>
              
@@ -18,6 +18,30 @@
         {
             <tr>
                 <td>@item.RoomNo</td>
+            </tr>
+        }
+
+    </table>
+
+</div>
+
+<div class="panel panel-primary">
+    <table class="table table-hover">
+        <h2 style="color: royalblue">Boşaltılan Odalar</h2>
+        <tr>
+            <th>Oda No</th>
+            <th>Çıkış Tarihi</th>
+
+
+
+        </tr>
+
+        @foreach (BookingDetail item in Model.BookingDetails)
+        {
+            <tr>
+                <td>@item.RoomNo</td>
+                <td>@item.CheckOut</td>
+
             </tr>
         }
 

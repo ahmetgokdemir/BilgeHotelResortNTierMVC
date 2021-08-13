@@ -12,7 +12,7 @@ namespace Project.WEBUI.VMClasses
         public Room Room { get; set; }
         public List<RoomDetail> RoomDetails { get; set; }
         public RoomDetail RoomDetail { get; set; }
-
+        public List<BookingDetail> BookingDetails { get; set; }
 
     }
 }

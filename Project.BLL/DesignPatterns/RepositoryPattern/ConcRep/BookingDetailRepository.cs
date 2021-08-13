@@ -22,7 +22,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
 
         public void GetActiveRezervation()
         {
-            List<BookingDetail> bds =  _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).ToList();
+            List<BookingDetail> bds = _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).ToList();
 
             foreach (BookingDetail bd in bds)
             {
@@ -41,7 +41,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
                     _db.SaveChanges();
                 }
 
-            }           
+            }
 
         }
 
@@ -76,6 +76,13 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
 
         }
 
+
+        // GetEmptiedRoomsfromStaff
+        public List<BookingDetail> GetEmptiedRoomsfromStaff()
+        {
+            return _db.Set<BookingDetail>().Where(x => x.CheckOut == DateTime.Today).ToList();
+
+        }
 
     }
 }
