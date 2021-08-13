@@ -172,9 +172,31 @@ namespace Project.WEBUI.Areas.Staff.Controllers
                 tutar = tutar * 2;
             }
 
-            if (TempData["rezervasyontur"].ToString() == "HerseyDahil")
+            else if(TempData["rezervasyontur"].ToString() == "HerseyDahil")
             {
                 tutar = tutar * 3;
+            }
+
+            TimeSpan indirim = dg.Subtract(DateTime.Today);
+            int discount;
+
+            if (Convert.ToInt32(indirim.Days) >= 90)
+            {
+                discount = Convert.ToInt32(tutar) / 100;
+                discount *= 23;
+                tutar = tutar - discount;
+            }
+            else if (Convert.ToInt32(indirim.Days) >= 30 && TempData["rezervasyontur"].ToString() == "HerseyDahil")
+            {
+                discount = Convert.ToInt32(tutar) / 100;
+                discount *= 18;
+                tutar = tutar - discount;
+            }
+            else if (Convert.ToInt32(indirim.Days) >= 30 && TempData["rezervasyontur"].ToString() == "TamPansiyon")
+            {
+                discount = Convert.ToInt32(tutar) / 100;
+                discount *= 16;
+                tutar = tutar - discount;
             }
 
 
