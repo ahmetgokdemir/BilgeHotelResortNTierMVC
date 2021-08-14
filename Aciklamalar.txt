@@ -25,3 +25,4 @@ derse ait youm satýrlarýný sil
 Git' e yükleme..+
 
 
+update-package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r   ===>>>  roslyn csc.exe hatasý SORUNU çözer .. 

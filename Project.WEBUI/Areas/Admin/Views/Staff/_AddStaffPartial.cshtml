@@ -21,18 +21,21 @@
                 @Html.ValidationMessageFor(model => model.DerivedCompany.CompanyName)
 
             </dd>*@
-
+            @Html.ValidationMessageFor(x => x.StaffUser.FirstName)
             @Html.TextBoxFor(x => x.StaffUser.FirstName, new { @class = "form-control", placeholder = "İsminizi giriniz" })
-
+            @Html.ValidationMessageFor(x => x.StaffUser.LastName)
             @Html.TextBoxFor(x => x.StaffUser.LastName, new { @class = "form-control", placeholder = "Soyisminizi giriniz" })
-
+            @Html.ValidationMessageFor(x => x.StaffUser.JobTitle)
             @Html.TextBoxFor(x => x.StaffUser.JobTitle, new { @class = "form-control", placeholder = "Meslek giriniz" })
+            @Html.ValidationMessageFor(x => x.StaffUser.Salary)
             @Html.TextBoxFor(x => x.StaffUser.Salary, new { @class = "form-control", placeholder = "Maaş giriniz" })
             @*@Html.TextBoxFor(x => x.StaffUser.HireDate, "{0:dd-MM-yyyy}", new { @class = "form-control", placeholder = "İşe giriş tarihi giriniz" })*@
+            @Html.ValidationMessageFor(x => x.StaffUser.HireDate)
             @Html.EditorFor(x => x.StaffUser.HireDate, "Date", new { @class = "form-control", placeholder = "İşe giriş tarihi giriniz" })
             
-
+            @Html.ValidationMessageFor(x => x.StaffUser.UserName)
             @Html.TextBoxFor(x => x.StaffUser.UserName, new { @class = "form-control", placeholder = "Kullanıcı ismi" })
+            @Html.ValidationMessageFor(x => x.StaffUser.Password)
             @Html.PasswordFor(x => x.StaffUser.Password, new { @class = "form-control", placeholder = "Sifre giriniz" })
 
 

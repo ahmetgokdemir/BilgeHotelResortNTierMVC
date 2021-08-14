@@ -9,6 +9,10 @@
     .genislik {
         width: 300px;
     }
+ 
+    .field-validation-error {
+        color: red;
+    }
 </style>
 
 <h3 style="color:red">   @TempData["OdaSayisiHatali"]</h3>
@@ -30,6 +34,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Fiyat</label>
                         <div class="col-sm-10">
+                            @Html.ValidationMessageFor(x => x.Room.Price)
                             @Html.TextBoxFor(x => x.Room.Price, new { @class = "form-control genislik" })
                         </div>
                     </div>

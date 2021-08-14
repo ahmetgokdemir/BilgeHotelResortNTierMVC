@@ -45,11 +45,17 @@
             <h2>Üyelik İşlemleri</h2>
             <div class="login-wrap">
 
+                @Html.ValidationMessageFor(x => x.CustomerUser.UserName)
                 @Html.TextBoxFor(x => x.CustomerUser.UserName, new { @class = "form-control", placeholder = "Kullanıcı ismi" })
+                @Html.ValidationMessageFor(x => x.CustomerUser.Password)
                 @Html.PasswordFor(x => x.CustomerUser.Password, new { @class = "form-control", placeholder = "Sifre giriniz" })
+                @Html.ValidationMessageFor(x => x.CustomerUser.RePassword)
                 @Html.PasswordFor(x => x.CustomerUser.RePassword, new { @class = "form-control", placeholder = "Tekrar Sifre giriniz" })
+                @Html.ValidationMessageFor(x => x.CustomerUser.Email)
                 @Html.TextBoxFor(x => x.CustomerUser.Email, new { @class = "form-control", placeholder = "Email giriniz" })
+                @Html.ValidationMessageFor(x => x.Profile.FirstName)
                 @Html.TextBoxFor(x => x.Profile.FirstName, new { @class = "form-control", placeholder = "İsminizi giriniz" })
+                @Html.ValidationMessageFor(x => x.Profile.LastName)
                 @Html.TextBoxFor(x => x.Profile.LastName, new { @class = "form-control", placeholder = "Soyisminizi giriniz" })
 
                 Doğum Tarihinizi Giriniz => <br />

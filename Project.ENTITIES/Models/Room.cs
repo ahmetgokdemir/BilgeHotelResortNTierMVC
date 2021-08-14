@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace Project.ENTITIES.Models
         public string ImagePath { get; set; }
         public bool availableBalcony { get; set; }
         public bool availableMinibar { get; set; }
+        [Required(ErrorMessage = "Oda ücreti boş bırakılamaz")]
+        [Range(100, 1000, ErrorMessage = "Ücret 100 ile 1000 arasında olmalıdır.")]
         public decimal Price { get; set; }
 
         public int HotelID { get; set; }

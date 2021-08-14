@@ -31,7 +31,9 @@
 
         @Html.HiddenFor(x => x.StaffUser.ID)
 
+        @Html.ValidationMessageFor(x => x.StaffUser.Password)
         @Html.PasswordFor(x => x.StaffUser.Password, new { @class = "form-control", placeholder = "Sifre giriniz" })
+        @Html.ValidationMessageFor(x => x.StaffUser.Salary)
         @Html.TextBoxFor(x => x.StaffUser.Salary, new { @class = "form-control", placeholder = "Maaş giriniz" })
         <div>Telefon Numarası Giriniz =></div>
         <br />
