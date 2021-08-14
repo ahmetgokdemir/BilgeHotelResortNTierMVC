@@ -212,7 +212,7 @@ namespace Project.WEBUI.Areas.Staff.Controllers
             c.Password = "123";
             c.RePassword = "123";
             c.Active = true;
-            c.Email = "asd";
+            c.Email = "asd@a.com";
             _cRep.Add(c);
 
             CustomerProfile cp = new CustomerProfile();
