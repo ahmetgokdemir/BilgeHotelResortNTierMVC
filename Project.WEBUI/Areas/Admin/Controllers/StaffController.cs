@@ -48,6 +48,11 @@ namespace Project.WEBUI.Areas.Admin.Controllers
             StaffUser.Role = ENTITIES.Enums.UserRole.Staff;
             StaffUser.HotelID = 1;
 
+            if (StaffUser.PhoneNo == null)
+            {
+                StaffUser.PhoneNo = "123";
+            }
+
             _spRep.Add(StaffUser);
 
             return RedirectToAction("StaffList");
@@ -77,7 +82,15 @@ namespace Project.WEBUI.Areas.Admin.Controllers
                         
             sp.Password = DantexCrypt.Crypt(StaffUser.Password);
             sp.Salary = StaffUser.Salary;
-            sp.PhoneNo = StaffUser.PhoneNo;
+
+            if (StaffUser.PhoneNo == null)
+            {
+                sp.PhoneNo = "123";
+            }
+            else
+            {
+              sp.PhoneNo = StaffUser.PhoneNo;
+            }
 
             _spRep.Update(sp);
 

@@ -31,8 +31,9 @@
             @Html.TextBoxFor(x => x.StaffUser.Salary, new { @class = "form-control", placeholder = "Maaş giriniz" })
             @*@Html.TextBoxFor(x => x.StaffUser.HireDate, "{0:dd-MM-yyyy}", new { @class = "form-control", placeholder = "İşe giriş tarihi giriniz" })*@
             @Html.ValidationMessageFor(x => x.StaffUser.HireDate)
+            <br />
             @Html.EditorFor(x => x.StaffUser.HireDate, "Date", new { @class = "form-control", placeholder = "İşe giriş tarihi giriniz" })
-            
+            <br />
             @Html.ValidationMessageFor(x => x.StaffUser.UserName)
             @Html.TextBoxFor(x => x.StaffUser.UserName, new { @class = "form-control", placeholder = "Kullanıcı ismi" })
             @Html.ValidationMessageFor(x => x.StaffUser.Password)

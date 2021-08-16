@@ -64,7 +64,7 @@ namespace Project.WEBUI.Areas.Admin.Controllers
             r.RoomAvailable--;
             _rRep.Update(r);
 
-            return RedirectToAction("RoomList");
+            return RedirectToAction("OperateRooms");
         }
 
         // UnMaintenanceRoomAjax
@@ -91,7 +91,7 @@ namespace Project.WEBUI.Areas.Admin.Controllers
             r.RoomAvailable++;
             _rRep.Update(r);
 
-            return RedirectToAction("RoomList");
+            return RedirectToAction("OperateRooms");
         }
 
         public ActionResult UpdateRoom(int id)
@@ -128,7 +128,7 @@ namespace Project.WEBUI.Areas.Admin.Controllers
 
 
                 _rRep.Update(rnew);
-                return RedirectToAction("RoomList");
+                return RedirectToAction("OperateRooms");
  
 
         }
