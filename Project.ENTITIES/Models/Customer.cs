@@ -19,6 +19,7 @@ namespace Project.ENTITIES.Models
         public string RePassword { get; set; }
         public Guid ActivationCode { get; set; }
         public bool Active { get; set; }
+        [Required(ErrorMessage = "{0} alanı bos gecilemez")]
         [EmailAddress(ErrorMessage = "{0} alanı sadece email formatında adres kabul edebilir")]
         public string Email { get; set; }
         public UserRole Role { get; set; }
