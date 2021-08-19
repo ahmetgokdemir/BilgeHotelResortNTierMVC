@@ -137,6 +137,8 @@
     <Compile Include="Areas\Staff\Controllers\BookingfromStaffController.cs" />
     <Compile Include="Areas\Staff\StaffAreaRegistration.cs" />
     <Compile Include="AuthenticationClasses\AdminAuthentication.cs" />
+    <Compile Include="AuthenticationClasses\MemberAuthentication.cs" />
+    <Compile Include="AuthenticationClasses\StaffAuthentication.cs" />
     <Compile Include="AuthenticationClasses\UserSharedAuthentication.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

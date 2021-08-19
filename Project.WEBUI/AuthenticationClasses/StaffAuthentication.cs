@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace Project.WEBUI.AuthenticationClasses
 {
-    public class UserSharedAuthentication : AuthorizeAttribute
+    public class StaffAuthentication : AuthorizeAttribute
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            if (httpContext.Session["admin"] != null || httpContext.Session["staff"] != null || httpContext.Session["member"] != null)
+            if (httpContext.Session["admin"] != null || httpContext.Session["staff"] != null)
             {
                 return true;
             }

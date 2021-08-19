@@ -11,6 +11,7 @@ using static Project.ENTITIES.Models.BookingDetail;
 
 namespace Project.WEBUI.Areas.Staff.Controllers
 {
+    //[StaffAuthentication]
     public class BookingfromStaffController : Controller
     {
         BookingRepository _bRep;

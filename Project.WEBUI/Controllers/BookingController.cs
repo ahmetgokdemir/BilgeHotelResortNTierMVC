@@ -149,7 +149,7 @@ namespace Project.WEBUI.Controllers
 
 
         //https://localhost:44337/api/Payment/ReceivePayment https://localhost:44337/
-
+        // RezervasyonBankaOnay yerine RezervasyonOnayla ismi verilirse CartPage.cshtml den direk buraya geçer o zaman da yukarıdaki RezervasyonOnayla Action'ı atlar bu yüzden RezervasyonBankaOnay ile isimlendirildi ki CartPage den yukarıda ki action sonra da bu action çalışsın..
         [HttpPost]
         public ActionResult RezervasyonBankaOnay(BookingVM bvm)
         {
