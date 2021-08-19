@@ -32,13 +32,11 @@ namespace Project.WEBUI.Controllers
 
         public ActionResult BookingList()
         {
-            _bdRep.GetActiveRezervation();
-
+            _bdRep.GetActiveRezervationtoPassive();
 
             RoomVM rvm = new RoomVM
             {
                 Rooms = _rRep.GetAvailableRooms()
-                // Rooms = _rRep.GetAll()
             };
 
             return View(rvm);

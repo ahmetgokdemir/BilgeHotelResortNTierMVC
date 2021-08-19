@@ -15,6 +15,12 @@ namespace Project.MAP.Options
 
             Ignore(x => x.ID);
             HasKey(x => new { x.BookingID, x.RoomID, x.RoomNo });
+            /* 
+             * x.RoomNo verilmesinin sebebi ilk iki haskey verinin unique olmasını sağlamıyor.. duplicate key yani benzer primary key hatası vermektedir.. Unique olmasını sağlamak için bir de RoomNo verildi.. x.ID her veri için 0 değeri alıyor o yüzden x.ID unique'liyi sağlamaz.. 
+             SqlException: Violation of PRIMARY KEY constraint 'PK_dbo.Rezervasyon Detayi'. Cannot insert duplicate key in object 'dbo.Rezervasyon Detayi'. The duplicate
+             key value is (1, 1).
+             The statement has been terminated.
+             */
 
             Property(x => x.CheckIn).HasColumnName("Giriş Tarihi").HasColumnType("datetime2").IsRequired(); //**
             Property(x => x.CheckOut).HasColumnName("Cikis Tarihi").HasColumnType("datetime2").IsRequired(); //**

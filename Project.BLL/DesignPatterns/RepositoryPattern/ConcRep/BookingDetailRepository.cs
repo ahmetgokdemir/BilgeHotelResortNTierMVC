@@ -20,7 +20,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
         }
 
 
-        public void GetActiveRezervation()
+        public void GetActiveRezervationtoPassive()
         {
             List<BookingDetail> bds = _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).ToList();
 
@@ -34,8 +34,6 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
                     rd.Situation = true;
 
                     Room r = _db.Set<Room>().Where(x => x.ID == bd.RoomID).FirstOrDefault();
-                    // int roomCount = Convert.ToInt32(r.RoomAvailable) + Convert.ToInt32(bd.Quantity);
-                    // r.RoomAvailable = Convert.ToInt16(roomCount);
                     r.RoomAvailable++;
 
                     _db.SaveChanges();

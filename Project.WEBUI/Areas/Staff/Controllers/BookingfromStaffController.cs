@@ -33,22 +33,21 @@ namespace Project.WEBUI.Areas.Staff.Controllers
 
         public ActionResult BookingList()
         {
-            _bdRep.GetActiveRezervation();
-
+            _bdRep.GetActiveRezervationtoPassive();
 
             RoomVM rvm = new RoomVM
             {
                 Rooms = _rRep.GetAvailableRooms()
-                // Rooms = _rRep.GetAll()
             };
 
             return View(rvm);
         }
 
         public ActionResult RezervationRooms()
-        {
+        {            
             BookingDetailVM bdvm = new BookingDetailVM
             {
+                // Rezervasyonlu odaların bilgileri...
                 ActiveRezervationDTOs = _bdRep.GetActiveRezervationfromStaff()
             };
 
