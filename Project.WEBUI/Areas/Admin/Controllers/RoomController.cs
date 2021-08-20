@@ -118,10 +118,18 @@ namespace Project.WEBUI.Areas.Admin.Controllers
             }
             else
             {
-                Room.ImagePath = ImageUploader.UploadImage("~/Images/", resim);
+                if (resim == null)
+                {
+                    Room.ImagePath = "/Images/default.jpg";
+                }
+                else
+                {
+                    Room.ImagePath = ImageUploader.UploadImage("~/Images/", resim);
+                }
 
             } 
  
+                // Room Room'ın diğer propertyleri empty gelmekte o yüzden rnew üzerinden çalışıldı..
                 Room rnew = _rRep.Find(Room.ID);
                 rnew.ImagePath = Room.ImagePath;               
                 rnew.Price = Room.Price; 

@@ -67,7 +67,8 @@
 
                         @if (item.ImagePath == null)
                         {
-                            <img src="~/Pictures/47a8571d-433b-4820-8e67-97c1a9490f89.jpg" alt="Resim yok" width="50" height="250" title="@item.RoomType" /> }
+                            <img src="~/Images/tek.jpg" alt="Resim yok" width="50" height="250" title="@item.RoomType" />
+                        }
                         else
                         {
                     <a href="@Url.Action("RoomDetails",new { id=item.ID})">
@@ -78,7 +79,7 @@
 
 
                                 <a href="@Url.Action("AddToCart",new { id=item.ID})" class="adtocart">
-                                    <i class="icon-shopping-cart"></i>
+                                    <i class="icon-book"></i>
                                 </a>
                         </div>
 
@@ -106,7 +107,7 @@
 @section Sepet{
     <li>
         <a href="@Url.Action("CartPage","Booking")">
-            <i class="icon-shopping-cart"></i> Cart
+            <i class="icon-pencil"></i> Booking
         </a>
     </li>
 

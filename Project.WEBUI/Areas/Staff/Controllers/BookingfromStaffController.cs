@@ -1,4 +1,5 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
+using Project.COMMON.Tools;
 using Project.ENTITIES.Models;
 using Project.WEBUI.Models.BookingTools;
 using Project.WEBUI.VMClasses;
@@ -208,26 +209,26 @@ namespace Project.WEBUI.Areas.Staff.Controllers
 
 
             Customer c = new Customer();
-            c.UserName = "asd";
-            c.Password = "123";
-            c.RePassword = "123";
-            c.Active = true;
-            c.Email = "asd@a.com";
+            c.UserName = "guest";
+            c.Password = DantexCrypt.Crypt("123"); 
+            c.RePassword = DantexCrypt.Crypt("123");
+            c.Active = false;
+            c.Email = "guest@bilgehotel.com";
             _cRep.Add(c);
 
             CustomerProfile cp = new CustomerProfile();
             cp.FirstName = TempData["firstName"].ToString();
             cp.LastName = TempData["lastName"].ToString();
-            cp.Address = "asd";
-            cp.PhoneNo = "asda";
+            cp.Address = "none";
+            cp.PhoneNo = "none";
             cp.BirthDate = DateTime.Now;
             cp.ID = c.ID;
             _cpRep.Add(cp);
 
             Booking book = new Booking();
             book.TotalPrice = tutar;
-            book.UserName = "asd";
-            book.Email = "asd";
+            book.UserName = "guest";
+            book.Email = "none";
              
             book.CustomerID = cp.ID;   // Yukarıda cp.ID Add ile oluşturuldu..
             _bRep.Add(book);
@@ -244,8 +245,6 @@ namespace Project.WEBUI.Areas.Staff.Controllers
                     bd.BookingID = book.ID; // _oRep.Add(ovm.Order); sayesinde OrderID'si oluşmuştu yoksa null olur..
                     bd.RoomID = item.ID;
                     bd.SubPrice = item.Price;
-
-                    // bd.Quantity = item.Amount;
 
                     bd.CheckIn = dg;
                     bd.CheckOut = dc;

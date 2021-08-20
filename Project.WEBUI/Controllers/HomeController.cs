@@ -20,10 +20,6 @@ namespace Project.WEBUI.Controllers
             _spRep = new StaffProfileRepository();
         }
 
-        public ActionResult Simulation()
-        {
-            return View();
-        }
 
         // GET: Home
         public ActionResult Login()
@@ -36,6 +32,7 @@ namespace Project.WEBUI.Controllers
         {
             Customer yakalanan = _crRep.FirstOrDefault(x => x.UserName == CustomerUser.UserName);
             StaffProfile yakalananstaff = _spRep.FirstOrDefault(x => x.UserName == StaffUser.UserName);
+            
             if (yakalanan == null && yakalananstaff == null)
             {
                 ViewBag.Kullanici = "Kullanıcı bulunamadı";
@@ -58,26 +55,14 @@ namespace Project.WEBUI.Controllers
             {
                 if (StaffUser.Password == decryptedStaff && yakalananstaff.Role == ENTITIES.Enums.UserRole.Admin)
                 {
-                    //if (!yakalananstaff.Active)  
-                    //{
-                    //    return AktifKontrol();  // Ctrl r+m ile AktifKontrol() method oluşturuldu..
-                    //}
-
                     Session["admin"] = yakalananstaff;
                     return RedirectToAction("RoomList", "Room", new { Area = "Admin" }); // Area = "Admin": RouteValue  
-
                 }
 
                 else if (StaffUser.Password == decryptedStaff && yakalananstaff.Role == ENTITIES.Enums.UserRole.Staff)
                 {
-                    //if (!yakalananstaff.Active)  
-                    //{
-                    //    return AktifKontrol();  // Ctrl r+m ile AktifKontrol() method oluşturuldu..
-                    //}
-
                     Session["staff"] = yakalananstaff;
                     return RedirectToAction("BookingList", "BookingfromStaff", new { Area = "Staff" }); // Area = "Admin": RouteValue  
-
                 }
             }
 
@@ -101,7 +86,7 @@ namespace Project.WEBUI.Controllers
 
         private ActionResult AktifKontrol()
         {
-            ViewBag.AktifDegil = "Lutfen hesabınızı aktif hale getiriniz..Mailinizi kontrol ediniz";
+            ViewBag.AktifDegil = "Lütfen önce hesabınızı aktif hale getiriniz. Mailinizi kontrol ediniz !";
             return View("Login");
         }
 

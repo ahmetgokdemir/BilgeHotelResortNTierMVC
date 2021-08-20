@@ -37,7 +37,7 @@ namespace Project.WEBUI.Controllers
 
             if (_crRep.Any(x => x.UserName == customerUser.UserName))
             {
-                ViewBag.ZatenVar = "Kullanıcı ismi daha önce alınmıs";
+                ViewBag.ZatenVar = "Kullanıcı ismi daha önce alınmış";
                 return View();
             }
             else if (_crRep.Any(x => x.Email == customerUser.Email))
@@ -47,9 +47,9 @@ namespace Project.WEBUI.Controllers
             }
 
             // https://localhost:44336/
-            string gonderilecekEmail = "Tebrikler... Hesabınız olusturulmustur...Hesabınızı aktive etmek icin https://localhost:44336/Register/Activation/" + customerUser.ActivationCode + " linkine tıklayabilirsiniz";
+            string gonderilecekEmail = "Tebrikler! Hesabınız olusturulmustur. Hesabınızı aktive etmek icin https://localhost:44336/Register/Activation/" + customerUser.ActivationCode + " linkine tıklayabilirsiniz.";
 
-            MailSender.Send(customerUser.Email, body: gonderilecekEmail, subject: "Hesap aktivasyon!");
+            MailSender.Send(customerUser.Email, body: gonderilecekEmail, subject: "Hesap aktivasyonu!");
 
             _crRep.Add(customerUser);
 
