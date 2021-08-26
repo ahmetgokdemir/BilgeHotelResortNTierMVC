@@ -16,15 +16,19 @@ namespace Project.WEBUI.Areas.Admin.Controllers
     {
         RoomRepository _rRep;
         RoomDetailRepository _rdRep;
+        BookingDetailRepository _bdRep;
 
         public RoomController()
         {
             _rRep = new RoomRepository();
             _rdRep = new RoomDetailRepository();
+            _bdRep = new BookingDetailRepository();
         }
 
         public ActionResult RoomList()
         {
+            _bdRep.GetActiveRezervationtoPassive();
+
             RoomVM rvm = new RoomVM
             {
                 Rooms = _rRep.GetAll()
