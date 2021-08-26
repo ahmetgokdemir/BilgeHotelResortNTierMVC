@@ -5,7 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>RezervasyonOnayla</h2>
+<h2>Rezervasyon Onayla</h2>
+
+<div class="jumbotron">
+Ödemeniz gereken tutar => @Convert.ToInt32(TempData["tutar"]) ₺ ...
+</div>
+
 
 <div>
     @using (Html.BeginForm("RezervasyonBankaOnay", "Booking", FormMethod.Post, new { @class = "form-horizontal tasi-form" }))

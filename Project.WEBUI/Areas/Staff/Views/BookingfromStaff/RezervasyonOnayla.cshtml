@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "RezervasyonOnayla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Rezervasyon Onayla</h2>
+
+<div class="jumbotron">
+Ödemeniz gereken tutar => @Convert.ToInt32(TempData["tutar"]) ₺ ...
+Rezervasyonu onaylamak icin lütfen @Html.ActionLink("tıklayınız", "RezervasyonBankaOnay")
+</div>

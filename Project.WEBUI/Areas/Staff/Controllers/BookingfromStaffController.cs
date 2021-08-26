@@ -154,33 +154,21 @@ namespace Project.WEBUI.Areas.Staff.Controllers
                 return RedirectToAction("CartPage");
             }
 
-            TempData["tarihgiris"] = cpvm.BookingDetail.CheckIn;
-            TempData["tarihcikis"] = cpvm.BookingDetail.CheckOut;
-            TempData["rezervasyontur"] = cpvm.BookingDetail.BookingType;
-
-            TempData["firstName"] = cpvm.CustomerProfile.FirstName;
-            TempData["lastName"] = cpvm.CustomerProfile.LastName;
-
-            return RedirectToAction("RezervasyonBankaOnay");
-
-        }
-
-        public ActionResult RezervasyonBankaOnay()
-        {
             Cart sepet = Session["bcart"] as Cart;
 
-            DateTime dg = Convert.ToDateTime(TempData["tarihgiris"]);
-            DateTime dc = Convert.ToDateTime(TempData["tarihcikis"]);
 
+            DateTime dg = cpvm.BookingDetail.CheckIn;
+            DateTime dc = cpvm.BookingDetail.CheckOut;
             TimeSpan kalan = dc.Subtract(dg);
+
             decimal tutar = sepet.TotalPrice * Convert.ToInt32(kalan.Days);
 
-            if (TempData["rezervasyontur"].ToString() == "TamPansiyon")
+            if (cpvm.BookingDetail.BookingType.ToString() == "TamPansiyon")
             {
                 tutar = tutar * 2;
             }
 
-            else if(TempData["rezervasyontur"].ToString() == "HerseyDahil")
+            else if (cpvm.BookingDetail.BookingType.ToString() == "HerseyDahil")
             {
                 tutar = tutar * 3;
             }
@@ -194,24 +182,45 @@ namespace Project.WEBUI.Areas.Staff.Controllers
                 discount *= 23;
                 tutar = tutar - discount;
             }
-            else if (Convert.ToInt32(indirim.Days) >= 30 && TempData["rezervasyontur"].ToString() == "HerseyDahil")
+            else if (Convert.ToInt32(indirim.Days) >= 30 && cpvm.BookingDetail.BookingType.ToString() == "HerseyDahil")
             {
                 discount = Convert.ToInt32(tutar) / 100;
                 discount *= 18;
                 tutar = tutar - discount;
             }
-            else if (Convert.ToInt32(indirim.Days) >= 30 && TempData["rezervasyontur"].ToString() == "TamPansiyon")
+            else if (Convert.ToInt32(indirim.Days) >= 30 && cpvm.BookingDetail.BookingType.ToString() == "TamPansiyon")
             {
                 discount = Convert.ToInt32(tutar) / 100;
                 discount *= 16;
                 tutar = tutar - discount;
             }
 
+            TempData["tutar"] = tutar;
+            TempData["tutaronay"] = tutar;
+
+            TempData["tarihgiris"] = cpvm.BookingDetail.CheckIn;
+            TempData["tarihcikis"] = cpvm.BookingDetail.CheckOut;
+            TempData["rezervasyontur"] = cpvm.BookingDetail.BookingType;
+
+            TempData["firstName"] = cpvm.CustomerProfile.FirstName;
+            TempData["lastName"] = cpvm.CustomerProfile.LastName;
+
+            return View();
+
+        }
+
+        public ActionResult RezervasyonBankaOnay()
+        {
+            Cart sepet = Session["bcart"] as Cart;
+
+            DateTime dg = Convert.ToDateTime(TempData["tarihgiris"]);
+            DateTime dc = Convert.ToDateTime(TempData["tarihcikis"]);
+
 
             Customer c = new Customer();
             c.UserName = "guest";
-            c.Password = DantexCrypt.Crypt("123"); 
-            c.RePassword = DantexCrypt.Crypt("123");
+            c.Password = DantexCrypt.Crypt("123");
+            c.RePassword = c.Password;
             c.Active = false;
             c.Email = "guest@bilgehotel.com";
             _cRep.Add(c);
@@ -226,7 +235,7 @@ namespace Project.WEBUI.Areas.Staff.Controllers
             _cpRep.Add(cp);
 
             Booking book = new Booking();
-            book.TotalPrice = tutar;
+            book.TotalPrice = Convert.ToDecimal(TempData["tutaronay"]);
             book.UserName = "guest";
             book.Email = "none";
              
@@ -293,7 +302,7 @@ namespace Project.WEBUI.Areas.Staff.Controllers
                 }
             }
 
-            TempData["odeme"] = "Rezervasyon işlemi gerçekleştirilmiştir ";
+            TempData["odeme"] = "Rezervasyon işlemi gerçekleştirilmiştir. ";
             //MailSender.Send(bvm.Booking.Email, body: $"Rezervasyonunuz basarıyla alındı..{bvm.Booking.TotalPrice}", subject: "Rezervasyon!!");
             Session.Remove("bcart");
             return RedirectToAction("BookingList");

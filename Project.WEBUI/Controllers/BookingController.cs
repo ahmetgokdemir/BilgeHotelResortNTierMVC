@@ -131,6 +131,53 @@ namespace Project.WEBUI.Controllers
                 return RedirectToAction("CartPage");
             }
 
+
+            Cart sepet = Session["bcart"] as Cart;
+
+
+
+            DateTime dg = cpvm.BookingDetail.CheckIn;    
+            DateTime dc = cpvm.BookingDetail.CheckOut;   
+            TimeSpan kalan = dc.Subtract(dg);
+
+            decimal tutar = sepet.TotalPrice * Convert.ToInt32(kalan.Days);
+
+            if (cpvm.BookingDetail.BookingType.ToString() == "TamPansiyon")
+            {
+                tutar = tutar * 2;
+            }
+
+            else if (cpvm.BookingDetail.BookingType.ToString() == "HerseyDahil")
+            {
+                tutar = tutar * 3;
+            }
+
+
+            TimeSpan indirim = dg.Subtract(DateTime.Today);
+            int discount;
+
+            if (Convert.ToInt32(indirim.Days) >= 90)
+            {
+                discount = Convert.ToInt32(tutar) / 100;
+                discount *= 23;
+                tutar = tutar - discount;
+            }
+            else if (Convert.ToInt32(indirim.Days) >= 30 && cpvm.BookingDetail.BookingType.ToString() == "HerseyDahil")
+            {
+                discount = Convert.ToInt32(tutar) / 100;
+                discount *= 18;
+                tutar = tutar - discount;
+            }
+            else if (Convert.ToInt32(indirim.Days) >= 30 && cpvm.BookingDetail.BookingType.ToString() == "TamPansiyon")
+            {
+                discount = Convert.ToInt32(tutar) / 100;
+                discount *= 16;
+                tutar = tutar - discount;
+            }
+
+            TempData["tutar"] = tutar;
+            TempData["tutaronay"] = tutar;
+
             TempData["tarihgiris"] = cpvm.BookingDetail.CheckIn;
             TempData["tarihcikis"] = cpvm.BookingDetail.CheckOut;
             TempData["rezervasyontur"] = cpvm.BookingDetail.BookingType;
@@ -157,44 +204,8 @@ namespace Project.WEBUI.Controllers
             DateTime dg = Convert.ToDateTime(TempData["tarihgiris"]);
             DateTime dc = Convert.ToDateTime(TempData["tarihcikis"]);
 
-            TimeSpan kalan = dc.Subtract(dg);
-            decimal tutar = sepet.TotalPrice * Convert.ToInt32(kalan.Days);
 
-            if (TempData["rezervasyontur"].ToString() == "TamPansiyon")
-            {
-                tutar = tutar * 2;
-            }
-
-            else if (TempData["rezervasyontur"].ToString() == "HerseyDahil")
-            {
-                tutar = tutar * 3;
-            }
-
-
-            TimeSpan indirim = dg.Subtract(DateTime.Today);
-            int discount;
-
-            if (Convert.ToInt32(indirim.Days) >= 90)
-            {
-                discount = Convert.ToInt32(tutar) / 100;
-                discount *= 23;
-                tutar = tutar - discount;
-            }
-            else if (Convert.ToInt32(indirim.Days) >= 30 && TempData["rezervasyontur"].ToString() == "HerseyDahil")
-            {
-                discount = Convert.ToInt32(tutar) / 100;
-                discount *= 18;
-                tutar = tutar - discount;
-            }
-            else if (Convert.ToInt32(indirim.Days) >= 30 && TempData["rezervasyontur"].ToString() == "TamPansiyon")
-            {
-                discount = Convert.ToInt32(tutar) / 100;
-                discount *= 16;
-                tutar = tutar - discount;
-            }
-
-
-            bvm.Booking.TotalPrice = bvm.PaymentDTO.BookingPrice = tutar;
+            bvm.Booking.TotalPrice = bvm.PaymentDTO.BookingPrice = Convert.ToDecimal(TempData["tutaronay"]);
 
             #region APISection
 
