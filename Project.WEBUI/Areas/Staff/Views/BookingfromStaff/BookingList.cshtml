@@ -75,12 +75,12 @@
 
                         @if (item.ImagePath == null)
                         {
-                            <img src="~/Images/tek.jpg" alt="Resim yok" width="50" height="250" title="@item.RoomType" /> 
+                            <img src="~/Images/tek.jpg" alt="Resim yok" width="50" height="250" title="@item.RoomDescription" /> 
                         }
                         else
                         {
                             <a href="@Url.Action("RoomDetails",new { id=item.ID})">
-                                <img src="@item.ImagePath" alt="Resim yok" width="50" height="250" title="@item.RoomType" />
+                                <img src="@item.ImagePath" alt="Resim yok" width="50" height="250" title="@item.RoomDescription" />
                             </a>
                         }
 
@@ -93,8 +93,8 @@
 
                     <div class="panel-body text-center">
                         <h4>
-                            <a href="#" class="pro-title" title="@item.RoomType">
-                                @item.RoomDescription
+                            <a href="#" class="pro-title" title="@item.RoomDescription">
+                                @item.RoomType
                             </a>
                         </h4>
                         <p class="price">₺@Convert.ToInt32(item.Price)</p>

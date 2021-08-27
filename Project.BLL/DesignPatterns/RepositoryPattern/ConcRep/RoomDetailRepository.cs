@@ -42,7 +42,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
             return rd;
         }
 
-        // GetMaintenanceRoomsfromStaff
+        
         public List<RoomDetail> GetMaintenanceRoomsfromStaff()
         {
 

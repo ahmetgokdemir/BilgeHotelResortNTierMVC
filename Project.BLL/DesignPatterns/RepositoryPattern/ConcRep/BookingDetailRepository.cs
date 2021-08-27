@@ -43,7 +43,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
 
         }
 
-        // GetActiveRezervationfromStaff
+        
         public List<ActiveRezervationSecondDTO> GetActiveRezervationfromStaff()
         {
             return _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).Join(_db.Set<Booking>(),
