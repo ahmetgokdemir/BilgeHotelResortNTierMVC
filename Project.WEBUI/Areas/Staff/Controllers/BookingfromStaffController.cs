@@ -148,7 +148,7 @@ namespace Project.WEBUI.Areas.Staff.Controllers
                 return RedirectToAction("CartPage");
             }
 
-            if (cpvm.BookingDetail.BookingType == 0)
+            if (string.IsNullOrEmpty(cpvm.BookingDetail.BookingType.ToString()))
             {
                 TempData["rezervasyonturuhatali"] = "Rezervasyon türü seçmelisiniz";
                 return RedirectToAction("CartPage");

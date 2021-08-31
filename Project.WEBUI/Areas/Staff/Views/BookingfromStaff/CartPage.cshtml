@@ -70,14 +70,14 @@
             <label class="col-sm-2 control-label">Tam Pansiyon</label>
             <div class="col-sm-4">
                 @Html.ValidationMessageFor(x => x.BookingDetail.BookingType)
-                @Html.RadioButtonFor(x => x.BookingDetail.BookingType, 1)
+                @Html.RadioButtonFor(x => x.BookingDetail.BookingType, "TamPansiyon")
 
             </div>
 
             <label class="col-sm-2 control-label">Her şey Dahil</label>
             <div class="col-sm-4">
                 @Html.ValidationMessageFor(x => x.BookingDetail.BookingType)
-                @Html.RadioButtonFor(x => x.BookingDetail.BookingType, 2)
+                @Html.RadioButtonFor(x => x.BookingDetail.BookingType, "HerseyDahil")
 
             </div>
 
