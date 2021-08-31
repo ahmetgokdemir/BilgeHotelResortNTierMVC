@@ -23,10 +23,10 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
             return _db.Set<Room>().Where(x => x.RoomAvailable > 0).ToList();
         }
 
-        public Room GetRoomById(int id)
-        {
-            return _db.Set<Room>().Where(x => x.ID == id).FirstOrDefault();
-        }
+        //public Room GetRoomById(int id)
+        //{
+        //    return _db.Set<Room>().Where(x => x.ID == id).FirstOrDefault();
+        //}
 
     }
 }

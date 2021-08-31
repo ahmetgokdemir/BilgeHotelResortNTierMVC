@@ -64,7 +64,7 @@ namespace Project.WEBUI.Areas.Admin.Controllers
             rd.isMaintenance = true;
             _rdRep.Update(rd);
 
-            Room r = _rRep.GetRoomById(rd.RoomID);
+            Room r = _rRep.Find(rd.RoomID);
             r.RoomAvailable--;
             _rRep.Update(r);
 
@@ -91,7 +91,7 @@ namespace Project.WEBUI.Areas.Admin.Controllers
             rd.isMaintenance = false;
             _rdRep.Update(rd);
 
-            Room r = _rRep.GetRoomById(rd.RoomID);
+            Room r = _rRep.Find(rd.RoomID);
             r.RoomAvailable++;
             _rRep.Update(r);
 

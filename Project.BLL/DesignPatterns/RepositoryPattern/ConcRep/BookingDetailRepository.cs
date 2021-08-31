@@ -20,6 +20,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
         }
 
 
+        // Aktif Rezervasyonların boşalma günü geldiyse odanın Situation'ını true yapma RoomAvailable sayısını artırma..
         public void GetActiveRezervationtoPassive()
         {
             List<BookingDetail> bds = _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).ToList();
@@ -30,7 +31,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
                 {
                     bd.ReservationActive = false;
 
-                    RoomDetail rd = _db.Set<RoomDetail>().Where(x => x.RoomNo == bd.RoomNo).FirstOrDefault();
+                    RoomDetail rd = _db.Set<RoomDetail>().Where(x => x.RoomNo == bd.RoomNo).FirstOrDefault(); // BookingDetail'e RoomNo attr. vermenin faydası => x.RoomNo == bd.RoomNo kullanılabilir..
                     rd.Situation = true;
 
                     Room r = _db.Set<Room>().Where(x => x.ID == bd.RoomID).FirstOrDefault();
@@ -43,7 +44,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
 
         }
 
-        
+        // Aktif Rezervasyonlar..
         public List<ActiveRezervationSecondDTO> GetActiveRezervationfromStaff()
         {
             return _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).Join(_db.Set<Booking>(),
@@ -75,7 +76,7 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
         }
 
 
-        // GetEmptiedRoomsfromStaff
+        // Günlük boşalan odalar..
         public List<BookingDetail> GetEmptiedRoomsfromStaff()
         {
             return _db.Set<BookingDetail>().Where(x => x.CheckOut == DateTime.Today).ToList();
