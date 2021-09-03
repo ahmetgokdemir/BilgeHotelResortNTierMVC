@@ -16,7 +16,7 @@ namespace Project.ENTITIES.Models
         public decimal SubPrice { get; set; }
         public bool ReservationActive { get; set; }
         public Package BookingType { get; set; }
-        public string RoomNo { get; set; }
+        public string RoomNo { get; set; } // RoomDetail'den geliyor..
 
 
         public int BookingID { get; set; }

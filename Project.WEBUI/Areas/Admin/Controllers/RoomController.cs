@@ -58,7 +58,7 @@ namespace Project.WEBUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult MaintenanceRoom(RoomDetail RoomDetail)
         {
-
+            // RoomDetail RoomDetail'ın diğer propertyleri empty gelmekte o yüzden rd üzerinden çalışıldı..
             RoomDetail rd = _rdRep.Find(RoomDetail.ID);
 
             rd.isMaintenance = true;
@@ -115,18 +115,18 @@ namespace Project.WEBUI.Areas.Admin.Controllers
                 Remember = false;
             }
 
-            if (Remember.Value)
+            if (Remember.Value) // checkbox ticklendi ise Room.ImagePath'e eski değeri set et..
             {
                 Room oldOne = _rRep.Find(Room.ID);
                 Room.ImagePath = oldOne.ImagePath;
             }
-            else
+            else // // checkbox ticklenmedi ise
             {
-                if (resim == null)
+                if (resim == null) // Resim seçilmediyse..
                 {
                     Room.ImagePath = "/Images/default.jpg";
                 }
-                else
+                else               // Resim seçildiyse..
                 {
                     Room.ImagePath = ImageUploader.UploadImage("~/Images/", resim);
                 }

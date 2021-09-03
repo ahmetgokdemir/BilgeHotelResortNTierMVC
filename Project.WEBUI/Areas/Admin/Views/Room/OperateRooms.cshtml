@@ -127,7 +127,7 @@
    
 
     function MaintenanceRoomLoaded() {
-        $("#MaintenanceRoomModal").modal('show');
+        $("#MaintenanceRoomModal").modal('show'); // #MaintenanceRoomModal içinde MaintenanceRoom var onun içinde de data var
     }
 
             $(function () {
@@ -138,12 +138,12 @@
 
                         //url,type,success
                         url: 'MaintenanceRoomAjax',
-                        data: { id: $(this).attr("data-id") },
+                        data: { id: $(this).attr("data-id") }, // this, value=formaintenance'ı temsil eder..
                         type: "Get",
-                        success: function (data)  // APInın return ettiği veridir data
+                        success: function (data)  // data, MaintenanceRoomAjax'ın return ettiği _MaintenanceRoomPartial verisidir
                         {
                             $('#MaintenanceRoom').html(data);
-                            MaintenanceRoomLoaded();     // Her API'ya bir istekte bulunduğum zaman table kısmına sıfırdan liste getirme için javascript kodunu yazmaktansa onu da fonksiyona alırız...
+                            MaintenanceRoomLoaded();      
 
                         }
 
@@ -157,12 +157,12 @@
 
                         //url,type,success
                         url: 'UnMaintenanceRoomAjax',
-                        data: { id: $(this).attr("data-id") },
+                        data: { id: $(this).attr("data-id") }, 
                         type: "Get",
-                        success: function (data)  // APInın return ettiği veridir data
+                        success: function (data)   
                         {
-                            $('#MaintenanceRoom').html(data);
-                            MaintenanceRoomLoaded();     // Her API'ya bir istekte bulunduğum zaman table kısmına sıfırdan liste getirme için javascript kodunu yazmaktansa onu da fonksiyona alırız...
+                            $('#MaintenanceRoom').html(data); // data, UnMaintenanceRoomAjax'ın return ettiği _UnMaintenanceRoomPartial verisidir
+                            MaintenanceRoomLoaded();      
 
                         }
 

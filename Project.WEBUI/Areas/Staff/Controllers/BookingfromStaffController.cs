@@ -290,8 +290,6 @@ namespace Project.WEBUI.Areas.Staff.Controllers
 
 
 
-
-
                     _bdRep.Add(bd);
 
                     //Stoktan düsmesini istiyorsanız
@@ -306,13 +304,6 @@ namespace Project.WEBUI.Areas.Staff.Controllers
             //MailSender.Send(bvm.Booking.Email, body: $"Rezervasyonunuz basarıyla alındı..{bvm.Booking.TotalPrice}", subject: "Rezervasyon!!");
             Session.Remove("bcart");
             return RedirectToAction("BookingList");
-
-
-
-
-
-
-
 
 
         }

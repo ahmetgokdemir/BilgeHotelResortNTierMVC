@@ -26,9 +26,9 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
             return rd;
         }
 
-        public List<RoomDetail> GetRoomsForMaintenance(int i)
+        public List<RoomDetail> GetRoomsForMaintenance(int i)  
         {
-
+            // x.RoomID == i  aynı özelliklerdeki odalar..
             List<RoomDetail> rd = _db.Set<RoomDetail>().Where(x => x.RoomID == i && x.isMaintenance == false && x.Situation == true).ToList();
 
             return rd;
