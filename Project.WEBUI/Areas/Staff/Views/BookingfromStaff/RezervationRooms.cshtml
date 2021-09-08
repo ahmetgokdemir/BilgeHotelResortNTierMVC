@@ -23,11 +23,11 @@
             </tr>
         </thead>
 
-        @foreach (ActiveRezervationSecondDTO item in Model.ActiveRezervationDTOs)
+        @foreach (BookingDetail item in Model.BookingDetails)
         {
             <tr>
-                <td>@item.FirstName</td>
-                <td>@item.LastName</td>
+                <td>@item.Booking.Customer.CustomerProfile.FirstName</td>
+                <td>@item.Booking.Customer.CustomerProfile.LastName</td>
                 <td>@item.RoomNo</td>
                 <td>@item.BookingType</td>
                 <td>@item.CheckIn</td>
@@ -51,7 +51,16 @@
         });
 
 
- 
+
     </script>
+}
+
+@section Logout{
+    <li>
+        <a href="@Url.Action("LogOut","BookingfromStaff")">
+            <i class="icon-signout"></i> Logout
+        </a>
+    </li>
+
 }
 

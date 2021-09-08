@@ -49,7 +49,7 @@ namespace Project.WEBUI.Areas.Staff.Controllers
             BookingDetailVM bdvm = new BookingDetailVM
             {
                 // Rezervasyonlu odaların bilgileri...
-                ActiveRezervationDTOs = _bdRep.GetActiveRezervationfromStaff()
+                BookingDetails = _bdRep.GetActiveRezervationfromStaff()
             };
 
             return View(bdvm);
@@ -306,6 +306,17 @@ namespace Project.WEBUI.Areas.Staff.Controllers
             return RedirectToAction("BookingList");
 
 
+        }
+
+        public ActionResult LogOut()
+        {
+            //Session.Clear(); bu ifade varolan bütün Session nesnelerini temizler
+            if (Session["staff"] != null)
+            {
+                Session.Remove("staff"); //sadece bu key'e sahip olan Session'u temizler
+            }
+
+            return RedirectToAction("Login","Home", new { Area = "" });
         }
 
 

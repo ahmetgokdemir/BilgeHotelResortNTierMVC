@@ -280,15 +280,34 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="~/OuterTools/img/avatar1_small.jpg">
-                            <span class="username">Jhon Doue</span>
+
+                            @if (@Session["admin"] != null)
+                            {
+                                StaffProfile s = @Session["admin"] as StaffProfile;
+                                <span class="username">@s.FirstName @s.LastName</span>
+                            }
+
+                            else if (@Session["staff"] != null)
+                            {
+                                StaffProfile s = @Session["staff"] as StaffProfile;
+                                <span class="username">@s.FirstName @s.LastName</span>
+                            }
+
+                            else if (@Session["member"] != null)
+                            {
+                                Customer c = @Session["member"] as Customer;
+                                <span class="username">@c.CustomerProfile.FirstName @c.CustomerProfile.LastName</span>
+                            }
+
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
-                            <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
-                            <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
-                            <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
+                            <li><a href="#"><i ></i></a></li>
+                        
+                       
                             @RenderSection("Sepet", false)
+                            @RenderSection("Logout", false)
                             @*<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>*@
                         </ul>
                     </li>

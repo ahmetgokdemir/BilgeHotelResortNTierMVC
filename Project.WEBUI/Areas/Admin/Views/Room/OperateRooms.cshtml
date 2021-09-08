@@ -63,7 +63,11 @@
 
 
                         @*<td class="center hidden-phone">@Html.ActionLink("Sil", "DeleteCategory", new { id = item.ID }, new { @class = "btn btn-danger" })</td>*@
+
+
                         <td class="center hidden-phone">@Html.ActionLink("Güncelle", "UpdateRoom", new { id = item.ID }, new { @class = "btn btn-warning" })</td>
+
+
                         @*<td>
                                 @Ajax.ActionLink("Bakıma Al", "MaintenanceRoomAjax", new { id = item.ID },
                                 new AjaxOptions
@@ -124,56 +128,64 @@
 
 <script>
 
-   
+
 
     function MaintenanceRoomLoaded() {
         $("#MaintenanceRoomModal").modal('show'); // #MaintenanceRoomModal içinde MaintenanceRoom var onun içinde de data var
     }
 
-            $(function () {
+    $(function () {
 
-                $("#tab1").on("click", "[value=formaintenance]", function () {
+        $("#tab1").on("click", "[value=formaintenance]", function () {
 
-                    $.ajax({
+            $.ajax({
 
-                        //url,type,success
-                        url: 'MaintenanceRoomAjax',
-                        data: { id: $(this).attr("data-id") }, // this, value=formaintenance'ı temsil eder..
-                        type: "Get",
-                        success: function (data)  // data, MaintenanceRoomAjax'ın return ettiği _MaintenanceRoomPartial verisidir
-                        {
-                            $('#MaintenanceRoom').html(data);
-                            MaintenanceRoomLoaded();      
+                //url,type,success
+                url: 'MaintenanceRoomAjax',
+                data: { id: $(this).attr("data-id") }, // this, value=formaintenance'ı temsil eder..
+                type: "Get",
+                success: function (data)  // data, MaintenanceRoomAjax'ın return ettiği _MaintenanceRoomPartial verisidir
+                {
+                    $('#MaintenanceRoom').html(data);
+                    MaintenanceRoomLoaded();
 
-                        }
+                }
 
-
-                    })
-                })
-
-                $("#tab1").on("click", "[value=forunmaintenance]", function () {
-
-                    $.ajax({
-
-                        //url,type,success
-                        url: 'UnMaintenanceRoomAjax',
-                        data: { id: $(this).attr("data-id") }, 
-                        type: "Get",
-                        success: function (data)   
-                        {
-                            $('#MaintenanceRoom').html(data); // data, UnMaintenanceRoomAjax'ın return ettiği _UnMaintenanceRoomPartial verisidir
-                            MaintenanceRoomLoaded();      
-
-                        }
-
-
-                    })
-                })
 
             })
+        })
+
+        $("#tab1").on("click", "[value=forunmaintenance]", function () {
+
+            $.ajax({
+
+                //url,type,success
+                url: 'UnMaintenanceRoomAjax',
+                data: { id: $(this).attr("data-id") },
+                type: "Get",
+                success: function (data) {
+                    $('#MaintenanceRoom').html(data); // data, UnMaintenanceRoomAjax'ın return ettiği _UnMaintenanceRoomPartial verisidir
+                    MaintenanceRoomLoaded();
+
+                }
+
+
+            })
+        })
+
+    })
 
 
 </script>
+
+@section Logout{
+    <li>
+        <a href="@Url.Action("LogOut","Room")">
+            <i class="icon-signout"></i> Logout
+        </a>
+    </li>
+
+}
 
 
 

@@ -71,17 +71,17 @@
                         }
                         else
                         {
-                    <a href="@Url.Action("RoomDetails",new { id=item.ID})">
-                        <img src="@item.ImagePath" alt="Resim yok" width="50" height="250" title="@item.RoomDescription" />
-                    </a>
-                                }
+                            <a href="@Url.Action("RoomDetails",new { id=item.ID})">
+                                <img src="@item.ImagePath" alt="Resim yok" width="50" height="250" title="@item.RoomDescription" />
+                            </a>
+                        }
 
 
 
-                                <a href="@Url.Action("AddToCart",new { id=item.ID})" class="adtocart">
-                                    <i class="icon-book"></i>
-                                </a>
-                        </div>
+                        <a href="@Url.Action("AddToCart",new { id=item.ID})" class="adtocart">
+                            <i class="icon-book"></i>
+                        </a>
+                    </div>
 
                     <div class="panel-body text-center">
                         <h4>
@@ -108,6 +108,15 @@
     <li>
         <a href="@Url.Action("CartPage","Booking")">
             <i class="icon-pencil"></i> Booking
+        </a>
+    </li>
+
+}
+
+@section Logout{
+    <li>
+        <a href="@Url.Action("LogOut","Booking")">
+            <i class="icon-signout"></i> Logout
         </a>
     </li>
 

@@ -9,7 +9,7 @@
     .genislik {
         width: 300px;
     }
- 
+
     .field-validation-error {
         color: red;
     }
@@ -79,4 +79,13 @@
             </section>
         </div>
     </div>}
+
+@section Logout{
+    <li>
+        <a href="@Url.Action("LogOut","Room")">
+            <i class="icon-signout"></i> Logout
+        </a>
+    </li>
+
+}
 

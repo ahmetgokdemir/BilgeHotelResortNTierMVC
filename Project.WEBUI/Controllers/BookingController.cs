@@ -32,6 +32,8 @@ namespace Project.WEBUI.Controllers
 
         public ActionResult BookingList()
         {
+
+
             _bdRep.GetActiveRezervationtoPassive();
 
             RoomVM rvm = new RoomVM
@@ -324,6 +326,18 @@ namespace Project.WEBUI.Controllers
 
             #endregion
         }
+
+        public ActionResult LogOut()
+        {
+            //Session.Clear(); bu ifade varolan bütün Session nesnelerini temizler
+            if (Session["member"] != null)
+            {
+                Session.Remove("member"); //sadece bu key'e sahip olan Session'u temizler
+            }
+
+            return RedirectToAction("Login", "Home");
+        }
+
 
         // GET: Booking
         public ActionResult Index()

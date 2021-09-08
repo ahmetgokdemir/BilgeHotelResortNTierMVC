@@ -75,7 +75,7 @@
 
                         @if (item.ImagePath == null)
                         {
-                            <img src="~/Images/tek.jpg" alt="Resim yok" width="50" height="250" title="@item.RoomDescription" /> 
+                            <img src="~/Images/tek.jpg" alt="Resim yok" width="50" height="250" title="@item.RoomDescription" />
                         }
                         else
                         {
@@ -116,6 +116,15 @@
     <li>
         <a href="@Url.Action("CartPage","BookingfromStaff")">
             <i class="icon-pencil"></i> Booking
+        </a>
+    </li>
+
+}
+
+@section Logout{
+    <li>
+        <a href="@Url.Action("LogOut","BookingfromStaff")">
+            <i class="icon-signout"></i> Logout
         </a>
     </li>
 

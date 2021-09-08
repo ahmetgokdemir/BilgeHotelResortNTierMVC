@@ -45,31 +45,32 @@ namespace Project.BLL.DesignPatterns.RepositoryPattern.ConcRep
         }
 
         // Aktif Rezervasyonlar..
-        public List<ActiveRezervationSecondDTO> GetActiveRezervationfromStaff()
+        public List<BookingDetail> GetActiveRezervationfromStaff()
         {
-            return _db.Set<BookingDetail>().Where(x => x.ReservationActive == true).Join(_db.Set<Booking>(),
-                (bd => bd.BookingID),
-                (bk => bk.ID),
-                (bd, bk) => new ActiveRezervationDTO
-                {
-                    RoomNo = bd.RoomNo,
-                    CheckIn = bd.CheckIn,
-                    CheckOut = bd.CheckOut,
-                    BookingType = bd.BookingType.ToString(),
-                    CustomerID = bk.CustomerID
-                }).Join(_db.Set<CustomerProfile>(),
-                (ar => ar.CustomerID),
-                (csp => csp.ID),
-                (ar, csp) => new ActiveRezervationSecondDTO
-                {
-                    RoomNo = ar.RoomNo,
-                    CheckIn = ar.CheckIn,
-                    CheckOut = ar.CheckOut,
-                    BookingType = ar.BookingType,
-                    CustomerID = ar.CustomerID,
-                    FirstName = csp.FirstName,
-                    LastName = csp.LastName
-                })
+            return _db.Set<BookingDetail>().Where(x => x.ReservationActive == true)
+                //.Join(_db.Set<Booking>(),
+                //(bd => bd.BookingID),
+                //(bk => bk.ID),
+                //(bd, bk) => new ActiveRezervationDTO
+                //{
+                //    RoomNo = bd.RoomNo,
+                //    CheckIn = bd.CheckIn,
+                //    CheckOut = bd.CheckOut,
+                //    BookingType = bd.BookingType.ToString(),
+                //    CustomerID = bk.CustomerID
+                //}).Join(_db.Set<CustomerProfile>(),
+                //(ar => ar.CustomerID),
+                //(csp => csp.ID),
+                //(ar, csp) => new ActiveRezervationSecondDTO
+                //{
+                //    RoomNo = ar.RoomNo,
+                //    CheckIn = ar.CheckIn,
+                //    CheckOut = ar.CheckOut,
+                //    BookingType = ar.BookingType,
+                //    CustomerID = ar.CustomerID,
+                //    FirstName = csp.FirstName,
+                //    LastName = csp.LastName
+                //})
                 .ToList();
 
 
