@@ -1,6 +1,7 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
 using Project.COMMON.Tools;
 using Project.ENTITIES.Models;
+using Project.WEBUI.AuthenticationClasses;
 using Project.WEBUI.Models.BookingTools;
 using Project.WEBUI.VMClasses;
 using System;
@@ -12,7 +13,7 @@ using static Project.ENTITIES.Models.BookingDetail;
 
 namespace Project.WEBUI.Areas.Staff.Controllers
 {
-    //[StaffAuthentication]
+    [StaffAuthentication]
     public class BookingfromStaffController : Controller
     {
         BookingRepository _bRep;

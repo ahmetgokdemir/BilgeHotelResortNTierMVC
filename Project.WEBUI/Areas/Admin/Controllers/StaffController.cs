@@ -1,6 +1,7 @@
 ﻿using Project.BLL.DesignPatterns.RepositoryPattern.ConcRep;
 using Project.COMMON.Tools;
 using Project.ENTITIES.Models;
+using Project.WEBUI.AuthenticationClasses;
 using Project.WEBUI.VMClasses;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Project.WEBUI.Areas.Admin.Controllers
 {
-    //[AdminAuthentication]
+    [AdminAuthentication]
     public class StaffController : Controller
     {
         StaffProfileRepository _spRep;
