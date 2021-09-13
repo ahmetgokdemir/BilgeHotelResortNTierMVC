@@ -330,12 +330,13 @@ namespace Project.WEBUI.Controllers
 
         public ActionResult LogOut()
         {
-            //Session.Clear(); bu ifade varolan bütün Session nesnelerini temizler
+             
             if (Session["member"] != null)
             {
-                Session.Remove("member"); //sadece bu key'e sahip olan Session'u temizler
+                Session.Remove("member");  
             }
 
+            TempData["out"] = "Çıkıs yaptınız";
             return RedirectToAction("Login", "Home");
         }
 

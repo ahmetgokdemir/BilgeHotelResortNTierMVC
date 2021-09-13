@@ -147,12 +147,13 @@ namespace Project.WEBUI.Areas.Admin.Controllers
 
         public ActionResult LogOut()
         {
-            //Session.Clear(); bu ifade varolan bütün Session nesnelerini temizler
+            
             if (Session["admin"] != null)
             {
-                Session.Remove("admin"); //sadece bu key'e sahip olan Session'u temizler
+                Session.Remove("admin"); 
             }
 
+            TempData["out"] = "Çıkıs yaptınız";
             return RedirectToAction("Login", "Home", new { Area = "" });
         }
     }

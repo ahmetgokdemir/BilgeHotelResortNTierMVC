@@ -311,12 +311,13 @@ namespace Project.WEBUI.Areas.Staff.Controllers
 
         public ActionResult LogOut()
         {
-            //Session.Clear(); bu ifade varolan bütün Session nesnelerini temizler
+             
             if (Session["staff"] != null)
             {
-                Session.Remove("staff"); //sadece bu key'e sahip olan Session'u temizler
+                Session.Remove("staff");  
             }
 
+            TempData["out"] = "Çıkıs yaptınız";
             return RedirectToAction("Login","Home", new { Area = "" });
         }
 
