@@ -8,6 +8,15 @@ namespace Project.ENTITIES.Models
 {
     public class Hotel : BaseEntity
     {
+        /*
+            //MyInit'de kullanılabilecek diğer yöntem...
+
+            public Hotel()
+            {
+                Rooms = new List<Room>();
+            }          
+         */
+
         public string Name { get; set; }
         public string Address { get; set; }
         public string PhoneNo { get; set; }

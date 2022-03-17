@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Project.MAP.Options
 {
+    // EntityTypeConfiguration*** 
     public abstract class BaseMap<T> : EntityTypeConfiguration<T> where T : BaseEntity
     {
         public BaseMap()

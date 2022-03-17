@@ -291,8 +291,8 @@ namespace Project.WEBUI.Controllers
                                         rd.Situation = false;
                                         _rdRep.Update(rd);   //  RoomDetailRepository _rdRep; // _rdRep = new RoomDetailRepository();
 
-                                        break; // continue
-                                    }
+                                        break; // continue döngüde diğer adıma geçer break ise döngüden tamamen çıkar
+                                }
                                 }
 
 

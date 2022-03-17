@@ -46,12 +46,15 @@ namespace Project.WEBUI.Controllers
                 return View();
             }
 
+            //Kullanıcı basarılı bir şekilde Register işlemini tamamladıysa ona Mail gönderecegiz... https://localhost:44329/ Kullanıcıya link atmamız lazım.. WEBUI'a sağ click >> Web Panelinden >> Project Url kopyala..
+
+            // bu linke destek veren bir action oluşturulmalıdır Activation(Guid id parametreli).. Url ve linkler her zaman gettir. sadece post ile değil get ile de veri gönderebiliriz.. sadece modifikasyona neden olunmuyor.. Bu method sadece bir action olacak..View'ı olmayacak..
             // https://localhost:44336/
             string gonderilecekEmail = "Tebrikler! Hesabınız olusturulmustur. Hesabınızı aktive etmek icin https://localhost:44336/Register/Activation/" + customerUser.ActivationCode + " linkine tıklayabilirsiniz.";
 
             MailSender.Send(customerUser.Email, body: gonderilecekEmail, subject: "Hesap aktivasyonu!");
 
-            _crRep.Add(customerUser);
+            _crRep.Add(customerUser); //profilden önce bunu eklemelisiniz önceliginiz bunu eklemek olmalı..Cünkü AppUser'in ID'si ilk basta olusmalı...Cünkü bizim kurdugumuz birebir ilişkide AppUser zorunlu olan alan Profile ise opsiyonel alandır. Dolayısıyla ilk basta AppUser'in ID'si SaveChanges ile olusmalı ki Profile'i rahatca ekleyebilelim(eger ekleyeceksek)
 
             if (!string.IsNullOrEmpty(profile.FirstName.Trim()) && !string.IsNullOrEmpty(profile.LastName.Trim()) && !string.IsNullOrEmpty(profile.PhoneNo.Trim()))
             {
@@ -78,6 +81,7 @@ namespace Project.WEBUI.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        // Bununda View'i layoutsuz olacak..
         public ActionResult RegisterOk()
         {
             return View();

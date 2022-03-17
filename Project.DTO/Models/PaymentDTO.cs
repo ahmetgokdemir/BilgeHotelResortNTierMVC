@@ -8,6 +8,10 @@ namespace Project.DTO.Models
 {
     public class PaymentDTO
     {
+        //Sanal Pos Entegrasyonu
+
+        //Normalde bu tarz sınıflar calıstıgınız sirketlerin(Banka/Kargo vs) aldıgınız dökümantasyonlarının kılavuzlugu sayesinde olusturulur..
+
         public int ID { get; set; } // ?!
         public string CardUserName { get; set; }
         public string SecurityNumber { get; set; }

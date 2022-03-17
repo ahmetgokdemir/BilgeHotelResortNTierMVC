@@ -13,10 +13,11 @@ namespace Project.MAP.Options
         {
             ToTable("Rezervasyon Detayi");
 
+            // Ignore, HasKey: Çoka çok ilişkilerde kullanılır...
             Ignore(x => x.ID);
-            HasKey(x => new { x.BookingID, x.RoomID, x.RoomNo });
+            HasKey(x => new { x.BookingID, x.RoomID, x.RoomNo }); // x.RoomID: 1-7; x.RoomNo: 101-501
             /* 
-             * x.RoomNo verilmesinin sebebi ilk iki haskey verinin unique olmasını sağlamıyor.. duplicate key yani benzer primary key hatası vermektedir.. Unique olmasını sağlamak için bir de RoomNo verildi.. x.ID her veri için 0 değeri alıyor o yüzden x.ID unique'liyi sağlamaz.. 
+             * x.RoomNo (RoomDetail'den geliyor..) verilmesinin sebebi ilk iki haskey (x.BookingID, x.RoomID) verinin unique olmasını sağlamıyor.. duplicate key yani benzer primary key hatası vermektedir.. Unique olmasını sağlamak için bir de RoomNo verildi.. x.ID her veri için 0 değeri alıyor o yüzden x.ID unique'liyi sağlamaz.. 
              SqlException: Violation of PRIMARY KEY constraint 'PK_dbo.Rezervasyon Detayi'. Cannot insert duplicate key in object 'dbo.Rezervasyon Detayi'. The duplicate
              key value is (1, 1).
              The statement has been terminated.

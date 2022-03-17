@@ -1,10 +1,134 @@
-- Entities
-- MAP
-- DTO 
-- COMMON > breakpoint
-- DAL s
-- BLL
-- UI > AdminAuthentication.cs (AdminAuthentication,UserSharedAuthentication düzenlenecek),
+* Blank Solution (NTierProject)
+	Project.Entities (Class Library .NetFramework)>>>
+	Project.MAP (Class Library .NetFramework)>>>
+	Project.DTO (Class Library .NetFramework)>>>  (Sanal POS Entegrasyonu için)
+	Project.COMMON (Class Library .NetFramework)>>> (Þifreleme, Mail gönderme, Resim Yükleme )
+	Project.DAL (Class Library .NetFramework)>>>
+	Project.BLL (Class Library .NetFramework)>>>
+	Project.UI (ASP.NET Web Application .NETFramework) (Empty + MVC) >>> AdminAuthentication.cs (AdminAuthentication,UserSharedAuthentication düzenlenecek),
+
+- WebUI Set as StartPage olarak ayarla..
+- EF indirme.. Solution Sað týkla.. Manage Nuget Package >>>  DTO, Entities, COMMON hariç diðerleri için indir..
+- WebUI >>> Web.Config >>> ConnectionString ..
+
+* (Diagram.png)
+* Project.Entities	>>> Enums  >>> DataStatus, UserRole
+					>>> Models >>> BaseEntity, StaffProfile, Hotel, Room, RoomDetail, BookingDetail, Booking, Customer, CustomerProfile, UserSpec 
+* Project.MAP		>>> Options >>> BaseMap, StaffProfileMap, HotelMap, RoomMap, RoomDetailMap, BookingDetailMap, BookingMap, CustomerMap, CustomerProfileMap, SpecMap
+
+BankAPI ile entegre çalýþacaðýz.. API Consume edilecekse yani yazýlmýþ API yý kullanarak API'ýn size açtýðý bilgilerle haberleþmeye geçecekseniz elinizde bir dökümantasyon olmasý
+lazým.. Dökümantasyonda ilgili API, hangi sýnýfta yazýlmýþsa belirli bir nesne oluþturmak için class patterni sunulur.. O class JSON'a dönüþtürülür o þekilde yollarsýnýz ilgili
+API'da deserilaze eder JSON'dan kendi yapýsýna dönüþtürür..
+
+Banka API aç.. BankAPI da olan DTO burada da olmasý lazým..
+
+* Project.DTO >>> Models >>> PaymentDTO
+
+* Project.COMMON >>> Tools >>> MailSender, ImageUploader (namespacelerini kontrol et..), DantexCrypt
+
+* Project.DAL >>> Context >>>  MyContext.cs ;; Strategy >>> MyInit.cs (Fake data kütüphanesi, bize hazýr data gönderecek, Bogus  ) => DAL'da Manage Nuget Packages
+
+* Project.BLL >>> DesignPatterns >>> SingletonPattern >>> DBTool.cs
+* Project.BLL >>> DesignPatterns >>> GenericRepository ...
+
+* Project.WEBUI >> AuthenticationClasses >> AdminAuthentication.cs , MemberAuthentication.cs, StaffAuthentication.cs, UserSharedAuthentication
+			    >> Models >> ShoppingTools >> Cart.cs, CartItem.cs
+			    >> VMClasses >> AppUserVM, BookingDetailVM, BookingVM, CartPageVM, RoomVM 
+				>> Areas (klasörü oluþturulduktan sonra sað click Add Area çýkýyor.. )
+				>> Images
+				>> OuterTools (Dýþarýdan gelecek template için) 
+
+				>>	Controllers >> RegisterController.cs
+								   OuterTool içersinde registration.html kopyala >> 
+								   RegisterNow.cshtml ve RegisterOk.cshtml oluþturuldu, Layout seçilmedi.. sonra registration.html'i buraya yapýþtýr..
+								   View içerisindeki Web.config namespace tanýmlamalarý..
+
+								   HomeController.cs sayfasý oluþturuldu.
+								   Login.cshtml sayfasý oluþturuldu. (Layout olmayacak..) . RegisterNow.cshtml'deki kodu kopyala Login.cshtml'e yapýþtýr..
+
+				roslyn.exe hatasý verdiði zaman clean solution, rebuilt solution yap..
+
+
+* Views >> Shared >> _Layout.cshtml
+Admin Panel için  >> Outer Tools >> index.html (silmek istediðin alanlarý inspect ile belirle.. belirledikten sonra silinecek yerleri orjinal dökümanýnda yapma) 
+index.html tamamýný kopyaladýk ve kopyalan kýsmý layouta yapýþtýrdýk.. 
+section class wrapper kýsmýný bul.. div class row state overview ve 4 tane div class row'u temizle... Silenen kýsma RenderBody() koy.. @RenderBody()
+
+* namespace'lerinde düzenlenmesi gerekiyor.. (~/OuterTools/ eklendi..)
+<script src="~/OuterTools/js/jquery.scrollTo.min.js"></script> 
+<img alt="avatar" src="~/OuterTools/img/avatar-mini4.jpg"></span>  gibi..
+
+* Advanced-Table entegrasyonu (advanced-table'ýn kütüphanelerini layouta entegre etmek):
+
+Outer Tools >> advanced_table.html : Aþaðýdakini Layouta yapýþtýrdýk..
+<link href=""~/OuterTools/assets/advanced-datatable/media/css/demo_page.css" rel="stylesheet" />
+<link href=""~/OuterTools/assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+
+Layoutta olan <script src="~/OuterTools/js/jquery.js"></script>
+              <script src="~/OuterTools/js/jquery-1.8.3.min.js"></script>
+              <script src="~/OuterTools/js/bootstrap.min.js"></script> aþaðýdan alýp yukarý kýsma taþýdýk..
+
+ advanced_table.html daki <script type="text/javascript" language="javascript" src=""~/OuterTools/assets/advanced-datatable/media/js/jquery.js"></script>  
+                          <script type="text/javascript" language="javascript" src=""~/OuterTools/assets/advanced-datatable/media/js/jquery.dataTables.js"></script> 
+						  kýsýmlarý al Layouta koy..
+
+------------------------------------  
+
+* advanced_table.html'de alt kýsmýnda javascript var bunu Layouta gömmeyeceðiz onun yerine
+
+ function fnFormatDetails ( oTable, nTr )
+      {
+          var aData = oTable.fnGetData( nTr );
+          var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+          sOut += '<tr><td>Rendering engine:</td><td>'+aData[1]+' '+aData[4]+'</td></tr>';
+          sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
+          sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
+          sOut += '</table>';
+
+          return sOut;
+      }
+
+      $(document).ready(function() {
+          /*
+           * Insert a 'details' column to the table
+           */
+          var nCloneTh = document.createElement( 'th' );
+          var nCloneTd = document.cr   
+          
+          .... KISMI AL  ama Layouta gömme.. Admin Area'sa gel ve AdminContent >> RoomDTJ.js'e yapýþtýr..  (Room Datatable js)
+
+------------------------------------
+
+<script src="~/Areas/Admin/AdminContent/RoomDTJ.js"></script>
+
+  advanced_table.html'de
+
+          <div class="panel-body">' i rap et ve kopyala.. RoomList.cshtml'e yapýþtýr..  (RoomList.cshtml'i oluþturmak gerek Layoutu olacak..)
+
+
+    RoomList.cshtml'de 
+    <script src="~/Areas/Admin/AdminContent/RoomDTJ.js"></script> eklendi..
+
+
+    RoomDTJ.js da <img src="~/OuterTools/asset..      ~ (tilda) yý kaldýr.. Javascript tildalarý kabul etmiyor.. Runtime da çalýþtýðý için 
+    Cntrl F5 yap..
+
+    RoomList.cshtml configure etmek..
+
+
+    Areas >> Admin >> View >> web.config'de     <add namespace="Project.WEBUI.VMClasses"/>
+                                                <add namespace="Project.ENTITIES.Models"/>   cntrl shift b
+
+------------------------------------------------------
+    CategoryDTJ.js  kontrol et..
+
+    sOut += '<tr><td>Ürünleri:</td><td><a title="Ýçerik" href="/Admin/Product/ProductList/' + aData[1] + '">' + aData[2] + ' </a>  </td></tr>';
+    sOut += '<tr><td>Detay Linki:</td><td> <a title="Detay" href="/Admin/Category/CategoryList/' + aData[1] + '">' + aData[2] + ' </a> </td></tr>';
+-----------------------------------------------------------
+
+Areas >> Admin >>	CategoryController.cs oluþturuldu..(backend kýsmý)
+					ProductController.cs oluþturuldu. (backend kýsmý)
+
 
 Scaffold Column+
 Otel Detay sayfasý..  +

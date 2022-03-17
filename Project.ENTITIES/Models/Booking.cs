@@ -8,8 +8,9 @@ namespace Project.ENTITIES.Models
 {
     public class Booking : BaseEntity
     {
-        public decimal TotalPrice { get; set; }
-        //Sipariş işlemlerinin icerisindeki bilgileri daha rahat yakalamak adına actıgımız property'lerdir...
+        public decimal TotalPrice { get; set; } //t-sqlde aggrecate funct. ile stored procudered ile tasarlayıp total price yazdırabilir.C# tarafında bir classın içerisinde ayrı bir property olarak tutulmasının nedeni kolay ulaşım sağlamak içindir.. 
+
+        //Sipariş işlemlerinin icerisindeki bilgileri daha rahat yakalamak adına actıgımız property'lerdir... (AppUser'dan ulaşabilsek bile linq performans kaybettirebileceği için aşağıdaki propertyler eklendi..)
         public string UserName { get; set; } // UserName, Email
         public string Email { get; set; }
 

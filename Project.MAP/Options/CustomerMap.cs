@@ -13,6 +13,7 @@ namespace Project.MAP.Options
         {
             ToTable("Musteriler");
 
+            //  Bire bir ilişilerde kullanılır.. // Bire bir ilişi için bir ayağı null geçilebilir ama diğer kısmı zorunlu olsun..
             HasOptional(x => x.CustomerProfile).WithRequired(x => x.Customer);
 
             Property(x => x.UserName).HasColumnName("Kullanici Adi").IsRequired();  

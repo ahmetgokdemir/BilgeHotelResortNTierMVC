@@ -12,6 +12,11 @@ namespace Project.DAL.Strategy
 {
     public class MyInit : CreateDatabaseIfNotExists<MyContext>
     {
+
+        //DataBase'e tam olusurken veri ekleyebilmek adına Seed metodunu override etmeliyiz(Polymorphism)
+        /* 
+            MyContext context; BaseRepository'deki gibi (_db = DBTool.DBInstance;) singletonpattern değil..
+         */
         protected override void Seed(MyContext context)
         {
             #region Hotel
@@ -58,6 +63,10 @@ namespace Project.DAL.Strategy
             r1.Price = 100;
             r1.HotelID = htl.ID;
 
+            // htl.Rooms.Add(r1); // Rooms null olduğu için Null Reference exception verir..  O yüzden kod Hotel instance alınınca ctor'da koleksiyonun instance alınsın..
+            // r1.HotelID = htl.ID; ve context.Rooms.Add(r1); => gerek kalmadan 
+            // context.Hotels.Add(htl);
+
             context.Rooms.Add(r1);
             context.SaveChanges();
 
@@ -65,8 +74,14 @@ namespace Project.DAL.Strategy
             rd1.RoomNo = "101";
             rd1.Situation = true;
             rd1.isMaintenance = false;
+
+            // r1.RoomDetails.Add(rd1); // RoomDetails null olduğu için Null Reference exception verir..  O yüzden kod Room instance alınınca ctor'da koleksiyonun instance alınsın..
+            // rd1.RoomID = r1.ID; ve context.RoomDetails.Add(rd1); => gerek kalmadan 
+            // context.Rooms.Add(r1);
+
             rd1.RoomID = r1.ID;
             context.RoomDetails.Add(rd1);
+
             context.SaveChanges();
 
             RoomDetail rd2 = new RoomDetail();

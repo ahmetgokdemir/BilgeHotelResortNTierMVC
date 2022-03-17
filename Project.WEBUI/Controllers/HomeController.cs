@@ -30,7 +30,7 @@ namespace Project.WEBUI.Controllers
         [HttpPost]
         public ActionResult Login(Customer CustomerUser, StaffProfile StaffUser) // VM deki ismi ile aynı olmalı..
         {
-            Customer yakalanan = _crRep.FirstOrDefault(x => x.UserName == CustomerUser.UserName);
+            Customer yakalanan = _crRep.FirstOrDefault(x => x.UserName == CustomerUser.UserName); // Register da appUser'ı unique olarak oluşturuldu..
             StaffProfile yakalananstaff = _spRep.FirstOrDefault(x => x.UserName == StaffUser.UserName);
             
             if (yakalanan == null && yakalananstaff == null)
@@ -42,21 +42,26 @@ namespace Project.WEBUI.Controllers
             string decrypted = "";
             if (yakalanan != null)
             {
+                // kişinin şifresini kontrol edebilmek için veritabanında yakalanan verinin şifresi decrypt edilmelidir..
                 decrypted = DantexCrypt.DeCrypt(yakalanan.Password);
             }
 
             string decryptedStaff = "";
             if (yakalananstaff != null)
             {
+                // admin or staff şifresini kontrol edebilmek için veritabanında yakalanan verinin şifresi decrypt edilmelidir..
                 decryptedStaff = DantexCrypt.DeCrypt(yakalananstaff.Password);
             }
 
             if (yakalananstaff != null)
             {
+                //Eger bir RedirectToAction metodu ile yönlendirme yapmak istediginiz alan bir Area ise bunun acıkca RouteValues parametresinde anonim tip olarak belirtilmesi gerekir.
                 if (StaffUser.Password == decryptedStaff && yakalananstaff.Role == ENTITIES.Enums.UserRole.Admin)
                 {
                     Session["admin"] = yakalananstaff;
                     return RedirectToAction("RoomList", "Room", new { Area = "Admin" }); // Area = "Admin": RouteValue  
+
+                    // (RedirectToAction methodun parantezleri arasına Ctrl shift+space) RouteValue, Base Url'inizde action ve controller dışındaki bilgiler
                 }
 
                 else if (StaffUser.Password == decryptedStaff && yakalananstaff.Role == ENTITIES.Enums.UserRole.Staff)
@@ -72,8 +77,8 @@ namespace Project.WEBUI.Controllers
                     {
                         if (!yakalanan.Active)
                         {
-                            return AktifKontrol();
-                        }
+                            return AktifKontrol(); // Ctrl r+m ile AktifKontrol() method oluşturuldu..
+                    }
 
                         Session["member"] = yakalanan;
                         return RedirectToAction("BookingList", "Booking");
